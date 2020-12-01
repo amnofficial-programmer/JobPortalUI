@@ -1,0 +1,158 @@
+<app-header></app-header>
+<app-banner></app-banner>
+<!-- contact area -->
+<div class="section-full content-inner browse-job shop-account">
+    <!-- Product -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 m-b30">
+                <div class="p-a30 border m-b30 contact-area border-1 radius-sm bg-white">
+                    <h2 class="m-b10 text-primary">CORE VALUES FOR JOB-SEEKERS:</h2>
+                    <ul class="no-margin">
+                        <li class="icon-bx-wraper left m-b10 d-flex justify-content-start align-items-center">
+                            <i class="fa fa-lightbulb-o fa-2x fa-pull-left fa-border text-primary"
+                                aria-hidden="true"></i> Instant
+                            Jobs
+                        </li>
+                        <li class="icon-bx-wraper left m-b10 d-flex justify-content-start align-items-center">
+                            <i class="fa fa-lightbulb-o fa-2x fa-pull-left fa-border text-primary"
+                                aria-hidden="true"></i> Only
+                            Verified Jobs and Company
+                        </li>
+                        <li class="icon-bx-wraper left m-b10 d-flex justify-content-start align-items-center">
+                            <i class="fa fa-lightbulb-o fa-2x fa-pull-left fa-border text-primary"
+                                aria-hidden="true"></i> Video Job
+                            Description
+                        </li>
+                        <li class="icon-bx-wraper left m-b10 d-flex justify-content-start align-items-center">
+                            <i class="fa fa-lightbulb-o fa-2x fa-pull-left fa-border text-primary"
+                                aria-hidden="true"></i> Direct Chat
+                            with Verified Recruiter
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="p-a30 border m-b30 contact-area border-1 radius-sm bg-white">
+                    <h2 class="m-b10 text-primary">CORE VALUES FOR RECRUITERS:</h2>
+                    <ul class="no-margin">
+                        <li class="icon-bx-wraper left m-b10 d-flex justify-content-start align-items-center">
+                            <i class="fa fa-lightbulb-o fa-2x fa-pull-left fa-border text-primary"
+                                aria-hidden="true"></i> Instant Hiring
+                        </li>
+                        <li class="icon-bx-wraper left m-b10 d-flex justify-content-start align-items-center">
+                            <i class="fa fa-lightbulb-o fa-2x fa-pull-left fa-border text-primary"
+                                aria-hidden="true"></i> Only Verified Profiles
+                        </li>
+                        <li class="icon-bx-wraper left m-b10 d-flex justify-content-start align-items-center">
+                            <i class="fa fa-lightbulb-o fa-2x fa-pull-left fa-border text-primary"
+                                aria-hidden="true"></i> Only IIT, NIT, BITS, IIIT and DTU
+                        </li>
+                        <li class="icon-bx-wraper left m-b10 d-flex justify-content-start align-items-center">
+                            <i class="fa fa-lightbulb-o fa-2x fa-pull-left fa-border text-primary"
+                                aria-hidden="true"></i> Video Resume
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 m-b30">
+                <div class="p-a30 job-bx radius-sm bg-white m-auto">
+                    <div class="tab-content nav">
+                        <form id="jobSeekerRegisterForm" class="tab-pane active col-12 p-a0"
+                            [formGroup]="jobSeekerRegister">
+                            <h2 class="font-weight-700 m-b5">
+                                Sign up as JobSeeker
+                                <small>
+                                    <a data-toggle="tab" href="#recruiterRegisterForm"
+                                        class="forget-pass float-right text-primary">
+                                        or Register as Recruiter</a>
+                                </small>
+                            </h2>
+
+                            <div class="form-group">
+                                <label class="font-weight-700">E-MAIL *</label>
+                                <input name="emailId" required="" class="form-control" placeholder="Your Email Address"
+                                    type="email" formControlName="emailId">
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-700">Set Password *</label>
+                                <input name="setPassword" required="" class="form-control " placeholder="Type Password"
+                                    type="password" formControlName="setPassword">
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-700">Confirm Password *</label>
+                                <input name="confirmPassword" required="" class="form-control "
+                                    placeholder="Type Password" type="password" formControlName="confirmPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="">
+                                    Send OTP to above email
+                                </label>
+                                <button class="site-button button-sm float-right">Send Otp</button>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-700">OTP *</label>
+                                <input name="" required="" class="form-control " placeholder="Type Password"
+                                    type="password" formControlName="otp">
+                            </div>
+                            <div class="text-left">
+                                <button class="site-button button-lg outline outline-2">Register as JobSeeker</button>
+                                <a href="/login" class="m-l5 m-t15 forget-pass float-right">
+                                    <i class="fa fa-sign-in"></i> Login Now.
+                                </a>
+                            </div>
+                        </form>
+                        <form id="recruiterRegisterForm" class="tab-pane fade col-12 p-a0"
+                            [formGroup]="recruiterRegister">
+                            <h2 class="font-weight-700 m-b5">
+                                Sign up as Recruiter
+                                <small>
+                                    <a data-toggle="tab" href="#jobSeekerRegisterForm"
+                                        class="forget-pass float-right text-primary">
+                                        or Register as JobSeeker</a>
+                                </small>
+                            </h2>
+
+                            <div class="form-group">
+                                <label class="font-weight-700">E-MAIL *</label>
+                                <input name="emailId" required="" class="form-control" placeholder="Your Email Address"
+                                    type="email" formControlName="emailId">
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-700">Set Password *</label>
+                                <input name="setPassword" required="" class="form-control " placeholder="Type Password"
+                                    type="password" formControlName="setPassword">
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-700">Confirm Password *</label>
+                                <input name="confirmPassword" required="" class="form-control "
+                                    placeholder="Type Password" type="password" formControlName="confirmPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="">
+                                    Send OTP to above email
+                                </label>
+                                <button class="site-button button-sm float-right">Send Otp</button>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-700">OTP *</label>
+                                <input name="" required="" class="form-control " placeholder="Type Password"
+                                    type="password" formControlName="otp">
+                            </div>
+                            <div class="text-left">
+                                <button class="site-button button-lg outline outline-2">Register as Recruiter</button>
+                                <a href="/login" class="m-l5 m-t15 forget-pass float-right">
+                                    <i class="fa fa-sign-in"></i> Login Now.
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product END -->
+</div>
+<!-- contact area  END -->
+<app-footer></app-footer>

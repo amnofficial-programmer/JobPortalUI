@@ -1,0 +1,19 @@
+<form [formGroup]="demoForm" (ngSubmit)="submitForm()">
+
+    <input type="text"  formControlName="text"/>
+    <select class="form-control" formControlName="college">
+        <option [value]="">Select from list</option>
+        <option [value]="college" *ngFor="let col of collegesList" >{{col.collegeName}}</option>
+    </select>
+    <button type="submit">Click me!</button>
+</form>
+
+<form [formGroup]="form">
+    <select formControlName="state">
+      <option *ngFor="let state of states" [ngValue]="state.abbrev">
+        {{ state.abbrev }}
+      </option>
+    </select>
+  </form>
+
+<p>Form value: {{ form.value | json }}</p>

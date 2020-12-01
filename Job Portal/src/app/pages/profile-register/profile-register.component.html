@@ -1,0 +1,376 @@
+<div class="section-full job-categories content-inner-2 bg-white">
+    <div class="container">
+        <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+            {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+        </button> -->
+        <mat-horizontal-stepper [linear]="isLinear" #stepper>
+            <mat-step [stepControl]="createJobSeekerCard" label="Create Job-Seeker Card">
+                <div class="job-bx job-profile">
+                    <div class="job-bx-title clearfix">
+                        <h5 class="font-weight-700 pull-left text-uppercase">Profile Information</h5>
+                    </div>
+                    <form [formGroup]="createJobSeekerCard">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Your Name:</label>
+                                    <input type="text" class="form-control" placeholder="Alexander Weir"
+                                        formControlName="fullName" required>
+                                        <mat-error>
+                                            <span *ngIf="!createJobSeekerCard.get('fullName').valid && createJobSeekerCard.get('fullName').touched">Your Name is required</span>
+                                          </mat-error>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Profile Headline:</label>
+                                    <input type="text" class="form-control"
+                                        placeholder="e.g. Software Developer | Java | React JS"
+                                        formControlName="profileHeadline">
+                                        <mat-error>
+                                            <span *ngIf="!createJobSeekerCard.get('profileHeadline').valid && createJobSeekerCard.get('profileHeadline').touched">Profile Headline is required</span>
+                                          </mat-error>
+                                </div>
+                            </div>
+                           </div>
+                           <div class="row ">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>College:</label>
+                                    <mat-select class="form-control"  formControlName="college">
+										<mat-option [value]="">Select from list</mat-option>
+                                        <mat-option *ngFor="let college of collegesList" [value]="college.collegeName">{{college.collegeName}}</mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!createJobSeekerCard.get('college').valid && createJobSeekerCard.get('college').touched">College is required</span>
+                                      </mat-error>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Last Company:</label>
+                                    <input type="text" class="form-control" placeholder="e.g. Microsoft"
+                                        formControlName="companyName">
+                                        <mat-error>
+                                            <span *ngIf="!createJobSeekerCard.get('companyName').valid && createJobSeekerCard.get('companyName').touched">Company Name is required</span>
+                                          </mat-error>
+                                </div>
+                            </div>
+                           </div>
+                           <div class="row ">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Degree:</label>
+                                    <mat-select class="form-control" id="degree" formControlName="degree"  >
+                                        <mat-option [value]="">Select from list</mat-option>
+                                        <mat-option *ngFor="let degree of degreeList" [value]="degree.degreeName"  (click)="onChangeDegreeCombox($event, degree.degreeName)">{{degree.degreeName}}</mat-option>
+
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!createJobSeekerCard.get('degree').valid && createJobSeekerCard.get('degree').touched">Degree is required</span>
+                                      </mat-error>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Experience:</label>
+                                    <mat-select class="form-control" formControlName="experience">
+                                        <mat-option [value]="">Select from list</mat-option>
+                                        <mat-option [value]="experience.experienceRange" *ngFor="let experience of experienceList" >{{experience.experienceRange}}</mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!createJobSeekerCard.get('experience').valid && createJobSeekerCard.get('experience').touched">Experience is required</span>
+                                      </mat-error>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row ">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Department:</label>
+                                    <mat-select class="form-control" formControlName="department" >
+                                        <option [value]="">Select from list</option>
+                                        <mat-option [value]="department.departmentName" (click)="onChangeDepartmentCombox($event.target.value)" *ngFor="let department of departmentsList">{{department.departmentName}}</mat-option>
+                                      
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!createJobSeekerCard.get('department').valid && createJobSeekerCard.get('department').touched">Department is required</span>
+                                      </mat-error>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Expected Salary:</label>
+                                    <mat-select class="form-control" formControlName="expected_salary">
+                                        <mat-option [value]="">Select from list</mat-option>
+                                        <mat-option [value]="salary.salaryRange" *ngFor="let salary of salaryRangesList" >{{salary.salaryRange}}</mat-option>
+                                     
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!createJobSeekerCard.get('expected_salary').valid && createJobSeekerCard.get('expected_salary').touched">Expected Salary is required</span>
+                                      </mat-error>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6">
+                              <div class="form-group">
+                                <label>Functional Area:</label>
+                                    <!-- <select class="form-control" formControlName="functionalArea">
+                                        <option value="">Select from list</option>
+                                        <option value="funcationAreas.functionalArea" *ngFor="let funcationAreas of functaionAreaList" (onchange)="onChangeFunctionaAreaCombox(funcationAreas.id)" >{{funcationAreas.functionalArea}}</option>
+                                    </select> -->
+                                    <ng-multiselect-dropdown [placeholder]="'Multi select'"   (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" 
+                                    (onDeSelect)="onItemDeSelect($event)"  (onDeSelectAll)="onDeSelectAll($event)"[data]="functaionAreaList" formControlName="functionalArea"
+                                    [settings]="MultSelect">
+                                </ng-multiselect-dropdown>
+                                  <mat-error>
+                                    <span *ngIf="!createJobSeekerCard.get('functionalArea').valid && createJobSeekerCard.get('functionalArea').touched">Functional Area is required</span>
+                                  </mat-error>
+                             </div> 
+
+
+                            </div>
+                        </div>
+                            <div class="row">
+                            
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Skills:</label>
+                                <ng-multiselect-dropdown [placeholder]="'Multi select'"   (onSelect)="onItemSelectSkill($event)" [data]="skillList" formControlName="skills"
+                                [settings]="MultSelectSkill">
+                              </ng-multiselect-dropdown>
+                              <mat-error>
+                                <span *ngIf="!createJobSeekerCard.get('skills').valid && createJobSeekerCard.get('skills').touched">Skills is required</span>
+                              </mat-error>
+                                </div>
+
+                                <!-- <div class="form-group row">
+                                    <label class="col-12">Add 4 Skills:</label>
+                                    <div class="col-6 mb-2">
+                                        <select name="" id="" formControlName="skill1">
+                                            <option value=""  >Select Functional Area first</option>
+                                            <option value="skills.skill" *ngFor="let skills of skillList" >{{skills.skill }}</option>
+                                      
+                                        </select>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <select name="" id="" formControlName="skill2">
+                                            <option value=""  >Select Functional Area first</option>
+                                            <option value="skills.skill" *ngFor="let skills of skillList" >{{skills.skill }}</option>
+                                      
+                                        </select>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <select name="" id="" formControlName="skill3">
+                                            <option value=""  >Select Functional Area first</option>
+                                            <option value="skills.skill" *ngFor="let skills of skillList" >{{skills.skill }}</option>
+                                      
+                                        </select>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <select name="" id="" formControlName="skill4">
+                                            <option value="" >Select Functional Area first</option>
+                                            <option value="skills.skill" *ngFor="let skills of skillList" >{{skills.skill }}</option>
+                                        
+                                        </select>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            {{createJobSeekerCard.value | json}}
+                        </div>
+                        <button class="site-button m-b30" mat-button matStepperNext>Next</button>
+                    </form>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </mat-step>
+            <mat-step [stepControl]="videoResume" label="Video Resume">
+                <div class="job-bx job-profile">
+                    <div class="job-bx-title clearfix">
+                        <h5 class="font-weight-700 text-uppercase">Walk Recruiters through your Video Resume.
+                            Don't miss your 1st impression!
+                            <small class="float-right">
+                                <a href="">Skip this step</a>
+                            </small>
+                        </h5>
+                    </div>
+                    <form [formGroup]="videoResume">
+                        <div class="row m-b30">
+
+                            <div class="col-lg-12 col-md-12">
+                                <h3> 1] Allow access to your Webcam and microphone to start recording your video Job Description</h3>
+
+                                <h3> 2] In case you have cliked on "Block", you can refresh this page and Allow again. Don't worry, It's 100% safe & secured</h3>
+                                   
+                                <h3> 3] Please ensure that you are wearing a decent attire and in a silent area</h3>
+                                   
+                                <h3>  4] Ensure to cover your core values and achievements within 60 Seconds of video</h3>
+                                <!-- <button class="text-center site-button m-b30 m-r30" (click)="allowCamera()">Allow</button> -->
+                           
+                            </div>
+
+                            <!-- <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Your Name:</label>
+                                    <input type="text" class="form-control" placeholder="Alexander Weir"
+                                        formControlName="secondCtrl">
+                                </div>
+                            </div> -->
+                            <!-- <ng-container *ngIf="ifAllowCamera"> -->
+                                <video id="video_{{idx}}" class="video-js vjs-default-skin" playsinline></video>
+
+                            <!-- </ng-container> -->
+             
+                            <mat-error>
+                                <span *ngIf="!videoResume.get('uploadVideo').valid && videoResume.get('uploadVideo').touched">Resume is required</span>
+                              </mat-error>
+                        </div>
+                        <div>
+                            <button class="site-button m-b30 m-r30" mat-button matStepperPrevious>Back</button>
+                            <button class="site-button m-b30" mat-button matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </div>
+            </mat-step>
+            <mat-step [stepControl]="uploadResume" label="Upload Resume">
+                <div class="job-bx job-profile">
+                    <div class="job-bx-title clearfix">
+                        <h5 class="font-weight-700 text-uppercase">Upload your updated Resume. Macrax support PDF, DOC,
+                            and DOCX formats only</h5>
+                    </div>
+
+                    <form class="attach-resume" [formGroup]="uploadResume">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <!-- <div class="form-group">
+                                    <div class="custom-file">
+                                        <p class="m-auto align-self-center">
+                                            <i class="fa fa-upload fa-3x"></i>
+                                            <br>You can also drag & drop here
+                                        </p>
+                                        <input type="file" class="site-button form-control" id="customFile"
+                                            formControlName="uploadResume">
+                                            <mat-error>
+                                                <span *ngIf="!uploadResume.get('uploadResume').valid && uploadResume.get('uploadResume').touched">Resume is required</span>
+                                              </mat-error>
+                                    </div>
+                                </div> -->
+                                <ngx-dropzone (change)="onSelect($event)" [multiple]="false" [maxFileSize]="2000">
+                                    <ngx-dropzone-label>You can also drag & drop here</ngx-dropzone-label>
+                                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" >
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-preview>
+                                </ngx-dropzone>
+
+                            </div>
+                        </div>
+                        <p class="text-center">
+                            Note: File size shouldn't exceed 15 MBs
+                        </p>
+                        <div>
+                            <button class="site-button m-b30 m-r30" mat-button matStepperPrevious>Back</button>
+                            <button class="site-button m-b30" mat-button matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </div>
+
+            </mat-step>
+            <mat-step [stepControl]="verification" label="Verification">
+                <div class="job-bx job-profile">
+                    <div class="job-bx-title clearfix">
+                        <h5 class="font-weight-700 text-uppercase">Upload one of the following documents to verify your
+                            College, Department and Degree as mentioned</h5>
+                    </div>
+                    <form class="attach-resume" [formGroup]="verification">
+                        <div class="row mb-3">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" type="radio" name="selectDocumentType"
+                                        id="aluminiIDCard" value="aluminiIDCard" formControlName="selectDocumentType">
+                                        
+                                    <label class="custom-control-label" for="aluminiIDCard">Alumini ID Card</label>
+                                    <mat-error>
+                                        <span *ngIf="!verification.get('selectDocumentType').valid && verification.get('selectDocumentType').touched">Document Type is required</span>
+                                      </mat-error>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" type="radio" name="selectDocumentType"
+                                        id="studentIDCard" value="studentIDCard" formControlName="selectDocumentType">
+                                        
+                                    <label class="custom-control-label" for="studentIDCard">Student ID Card</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" type="radio" name="selectDocumentType"
+                                        id="transcript" value="transcript" formControlName="selectDocumentType">
+                                        
+                                    <label class="custom-control-label" for="transcript">Transcript</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" type="radio" name="selectDocumentType"
+                                        id="degreeCertificate" value="degreeCertificate"
+                                        formControlName="selectDocumentType">
+                                        
+                                    <label class="custom-control-label" for="degreeCertificate">Degree
+                                        Certificate</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" type="radio" name="selectDocumentType"
+                                        id="hostelCard" value="hostelCard" formControlName="selectDocumentType">
+                                        
+                                    <label class="custom-control-label" for="hostelCard">Hostel Card</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <!-- <div class="form-group">
+                                    <div class="custom-file">
+                                        <p class="m-auto align-self-center">
+                                            <i class="fa fa-upload fa-3x"></i>
+                                            <br>You can also drag & drop here
+                                        </p>
+                                        <input type="file" class="site-button form-control" id="customFile"
+                                            formControlName="uploadDocument">
+                                            <mat-error>
+                                                <span *ngIf="!verification.get('uploadDocument').valid && verification.get('uploadDocument').touched">Document is required</span>
+                                              </mat-error>
+                                    </div>
+                                </div> -->
+                            
+                            
+                                <ngx-dropzone (change)="onSelect1($event)" [multiple]="false" [maxFileSize]="2000">
+                                    <ngx-dropzone-label>You can also drag & drop here</ngx-dropzone-label>
+                                    <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove1(f)"  >
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-preview>
+                                </ngx-dropzone>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <button class="site-button m-b30 m-r30" mat-button matStepperPrevious>Back</button>
+                            <button class="site-button m-b30" mat-button (click)="onSave()" >Save</button>
+                        </div>
+                    </form>
+                </div>
+            </mat-step>
+            <!-- <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <p>You are now done.</p>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="stepper.reset()">Reset</button>
+                </div>
+            </mat-step> -->
+        </mat-horizontal-stepper>
+
+    </div>
+</div>

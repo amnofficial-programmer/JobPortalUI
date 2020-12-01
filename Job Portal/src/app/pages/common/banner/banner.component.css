@@ -1,0 +1,25 @@
+.job-search-form h2{
+    font-size: 50px;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 20px;
+    line-height: 50px;
+}
+.job-search-form h3 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.carousel .carousel-item {
+  height: 600px;
+}
+
+.carousel-item img {
+    position: absolute;
+    object-fit:cover;
+    top: 0;
+    left: 0;
+    min-height: 650px;
+}
