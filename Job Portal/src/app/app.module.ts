@@ -49,6 +49,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { RecruiterForgetPasswordComponent } from './pages/recruiter-forget-password/recruiter-forget-password.component';
 import { DemoComponentComponent } from './demo-component/demo-component.component';
+import { ChatClientComponent } from './pages/chat-client/chat-client.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { DemoComponentComponent } from './demo-component/demo-component.componen
     ForgetPasswordComponent,
     RecruiterForgetPasswordComponent,
     DemoComponentComponent,
+    ChatClientComponent,
    
   ],
   imports: [

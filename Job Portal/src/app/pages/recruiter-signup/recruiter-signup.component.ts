@@ -6,6 +6,7 @@ import { RecruiterService } from 'src/app/services/recruiter.service';
 import { JobSeekerService } from 'src/app/services/job-seeker.service';
 import { Constants } from 'src/app/api-url';
 import { LoginService } from 'src/app/services/login.service';
+import { SmsService } from 'src/app/services/sms.service';
 
 @Component({
   selector: 'app-recruiter-signup',
@@ -16,7 +17,7 @@ export class RecruiterSignupComponent implements OnInit {
 
   recruiterRegister: FormGroup;
 	hasFormErrors = false;
-  constructor(private _formBuilder: FormBuilder,private jobseekerService:JobSeekerService,private router:Router,private loginService:LoginService) { }
+  constructor(private _formBuilder: FormBuilder,private jobseekerService:JobSeekerService,private router:Router,private loginService:LoginService, private smsService:SmsService) { }
 
   ngOnInit() {
     this.createFormRecruiter();
@@ -96,6 +97,19 @@ createUser(_user: UserModel) {
   });
 }
 
+sendOtp(){
 
+  const controls = this.recruiterRegister.controls;
+  const data={
+    "expiry": 900,
+    "message": "Your otp code is {code}",
+    "mobile": 8459263834,
+    "sender_id": "SMSInfo",
+    "userName": controls.userName.value
+   }
+  this.smsService.sendOtp(data).subscribe(res=>{
+    console.log(res);
+  })
+}
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 // RxJS
 import { Observable } from 'rxjs';
 
@@ -16,14 +16,32 @@ import { RecruiterModel } from '../models/recruiter.model';
 
 @Injectable()
 export class RecruiterService {
-    constructor(private http: HttpClient) { }
+
+    token:any;
+
+    constructor(private http: HttpClient) { 
+        this.token=localStorage.getItem('macrax-token')
+    }
     
 //     createRecruiterUser(user: UserModel): Observable<ResponseModel> {
 // 		return this.http.post<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Job_Seeker, user);
 // 	}
-createRecruiterProfile(jobSeeker:RecruiterModel):Observable<ResponseModel>{
-	return this.http.post<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Job_Seeker_Add, jobSeeker);
 
-}
+    getHTTPHeaders(): HttpHeaders {
+        let result = new HttpHeaders();
+        result = result.set('Content-Type', 'application/json');
+        result = result.set('Authorization', 'Bearer ' +this.token);
+
+        return result;
+    }
+    createRecruiterProfile(jobSeeker:RecruiterModel):Observable<ResponseModel>{
+        return this.http.post<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Job_Seeker_Add, jobSeeker);
+
+    }
+
+    getAllRecruiters(role:string): Observable<ResponseModel>{
+        const httpHeaders = this.getHTTPHeaders();
+        return this.http.get<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.GetRecruiters+role,{ headers: httpHeaders,});
+    }
 
 }

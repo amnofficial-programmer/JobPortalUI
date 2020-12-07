@@ -246,7 +246,7 @@ getAllFuncationalArea(){
 			// this.funcationAreaList.push({'id':7,'functionalArea':'functionalArea3'});
 			// this.funcationAreaList.push({'id':8,'functionalArea':'functionalArea4'});
 			
-			console.log("Area Lists"+this.functaionAreaList);
+			//console.log("Area Lists"+this.functaionAreaList);
 		}else{
 			alert(res.msg)
 		}
@@ -294,7 +294,7 @@ getAllExprience(){
 }
 
 getAllJobLocation(){
-	debugger
+	//debugger
 	this.jobSeekerService.getAllJobLocation().subscribe(res=>{
 		console.log(res);
 		if(res.status==200){

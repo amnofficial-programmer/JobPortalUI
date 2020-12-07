@@ -91,11 +91,14 @@ createUser(_user: UserModel) {
   });
 }
 sendOtp(){
+
+  const controls = this.jobSeekerRegisterForm.controls;
   const data={
     "expiry": 900,
     "message": "Your otp code is {code}",
     "mobile": 8459263834,
-    "sender_id": "SMSInfo"
+    "sender_id": "SMSInfo",
+    "userName": controls.userName.value
    }
   this.smsService.sendOtp(data).subscribe(res=>{
     console.log(res);

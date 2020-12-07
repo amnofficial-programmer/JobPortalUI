@@ -17,9 +17,8 @@ import { JobSeekerModel } from '../models/job-seeker.model';
 @Injectable()
 export class JobSeekerService {
 	token:any;
-		constructor(private http: HttpClient) { 
-
-this.token=localStorage.getItem('macrax-token')
+	constructor(private http: HttpClient) { 
+      this.token=localStorage.getItem('macrax-token')
 	}
 
 	getHTTPHeaders(): HttpHeaders {
@@ -30,15 +29,20 @@ this.token=localStorage.getItem('macrax-token')
 		return result;
 	  }
 
-createJobSeekerProfile(jobSeeker:JobSeekerModel):Observable<ResponseModel>{
-	const httpHeaders = this.getHTTPHeaders();
+	createJobSeekerProfile(jobSeeker:JobSeekerModel):Observable<ResponseModel>{
+		const httpHeaders = this.getHTTPHeaders();
 
-	return this.http.post<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Job_Seeker_Add, jobSeeker,{   headers: httpHeaders,});
+		return this.http.post<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Job_Seeker_Add, jobSeeker,{   headers: httpHeaders,});
 
-}
+	}
 	//get all Read
 	// READ
 	
+getAllJobSeekers(role:string): Observable<ResponseModel>{
+		const httpHeaders = this.getHTTPHeaders();
+		return this.http.get<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.GetJobSeekers+role,{   headers: httpHeaders,});
+}
+
 getAllColleges(): Observable<ResponseModel>{
 	const httpHeaders = this.getHTTPHeaders();
 	return this.http.get<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.College,{   headers: httpHeaders,});

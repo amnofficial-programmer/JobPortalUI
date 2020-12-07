@@ -21,6 +21,8 @@ export class Constants {
         Upload_Jd_File:'uplaod/jd/doc',
         Upload_Verification_Doc:'uplaod/verification/doc',
         Upload_Jd_Video:'uplaod/jd/video',
+        GetRecruiters: 'auth/users?role=',
+        GetJobSeekers: 'auth/users?role='
 
 
 }

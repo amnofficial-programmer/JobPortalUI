@@ -46,15 +46,13 @@ export class JobseekerLoginComponent implements OnInit {
           alert("Login sucessfully");
         const responseObj=res['data'];
         localStorage.setItem('macrax-token',responseObj.token);
+        localStorage.setItem('macrax-emailId',responseObj.userName);
+        localStorage.setItem('role','0');
         if(responseObj.IsOnboard==0){
-      this.router.navigateByUrl('/dashboard/job-seeker-profilereg')
-      
-     
-
-      }else{
-
-     this.router.navigateByUrl('/dashboard/home')
-      }
+          this.router.navigateByUrl('/dashboard/job-seeker-profilereg')
+        }else{
+          this.router.navigateByUrl('/dashboard/home')
+        }
     }
       
     }, err => {

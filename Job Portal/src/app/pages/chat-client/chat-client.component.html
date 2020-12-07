@@ -1,0 +1,83 @@
+<div id="ng-chat" class="dark-theme">
+    <a #ngChatTitle class="ng-chat-title secondary-background shadowed setMargin" (click)="toggleChat()"><span> Friends </span></a>
+    <div id="ng-chat-people" #ngChatPeople> 
+      <input class="friends-search-bar ng-untouched ng-pristine ng-valid" id="ng-chat-search_friend" type="search" placeholder="Search">
+      <ul id="ng-chat-users" class="offset-search">
+        <li [id]="user.id" *ngFor="let user of users" (click)="openChatWithUser($event, user)">
+          <div class="ng-chat-friends-list-container">
+            <img alt="" class="avatar" height="30" width="30" src="https://66.media.tumblr.com/avatar_9dd9bb497b75_128.pnj">
+            <strong title="Arya Stark">{{ user.userName }}</strong>
+            <span class="ng-chat-participant-status online" title=""></span><!---->
+            <span class="ng-chat-unread-messages-count unread-messages-counter-container">2</span>
+          </div>
+        </li>
+  
+  <!--
+        <li (click)="openChatWithUser()">
+          <div class="ng-chat-friends-list-container">
+             <img alt="" class="avatar" height="30" width="30" src="https://66.media.tumblr.com/avatar_9dd9bb497b75_128.pnj"> 
+            <fa name="cog" animation="spin"></fa>
+            <strong title="Arya Stark">Arya Stark</strong>
+            <span class="ng-chat-participant-status online" title=""></span>
+            <span class="ng-chat-unread-messages-count unread-messages-counter-container primary-text">2</span>
+          </div>
+        </li>
+        
+        <li>
+          <div class="ng-chat-friends-list-container">
+            <img alt="" class="avatar" height="30" width="30" src="https://pbs.twimg.com/profile_images/600707945911844864/MNogF757_400x400.jpg">
+            <strong title="Eddard Stark">Eddard Stark</strong>
+            <span class="ng-chat-participant-status offline" title=""></span>
+            <span class="ng-chat-unread-messages-count unread-messages-counter-container primary-text">7</span>
+            </div>
+        </li> -->
+  
+      </ul>
+    </div>
+  
+    <div #ngChatWindow [id]="user.id" class="ng-chat-window primary-outline-color" [ngStyle]="{'right': user.rightPosition}" *ngFor="let user of ngChatWindows">
+      <div class="ng-chat-title secondary-background" (click)="toggleChatWindow(user)">
+        <div class="ng-chat-title-visibility-toggle-area">
+          <strong title="Hodor"> {{ user.userName }} </strong>
+          <span class="ng-chat-participant-status offline" title=""></span>
+        </div>
+        <a class="ng-chat-close primary-text" (click)="closeNgChatWindow(user)">X</a>
+      </div>
+      <div #ngChatWindowContainer  class="ng-chat-window-container">
+        <div class="ng-chat-messages primary-background">
+          <div *ngFor="let message of user.messages">
+            <div class="ng-chat-message ng-chat-message-received" *ngIf="!isCurrentUser(message['from']); else other_content">
+              <img alt="" class="avatar" height="30" width="30" src="https://pbs.twimg.com/profile_images/378800000449071678/27f2e27edd119a7133110f8635f2c130.jpeg">
+              <div class="received-chat-message-container">
+                <span>{{ message.text }}</span>
+                <span class="message-sent-date">{{ message.time }}</span>
+              </div>
+            </div>
+              <ng-template #other_content>
+                <div class="ng-chat-message"> 
+                  <div class="sent-chat-message-container">
+                    <span>{{ message.text }}</span>
+                    <span class="message-sent-date">{{ message.time }}</span>
+                  </div>
+                </div>
+              </ng-template>
+              <!-- <div class="ng-chat-message ng-chat-message-received" *ngFor="let message of user.messages" >
+                <img alt="" class="avatar" height="30" width="30" src="https://pbs.twimg.com/profile_images/378800000449071678/27f2e27edd119a7133110f8635f2c130.jpeg">
+                <div class="received-chat-message-container">
+                  <span>{{ message.text }}</span>
+                  <span class="message-sent-date">{{ message.time }}</span>
+              </div> -->
+            
+          </div>
+        </div>
+  
+  
+        <div  class="ng-chat-footer primary-outline-color primary-background">
+  
+          <input type="text" (keyup)="$event.keyCode == 13 ? sendMessage($event, user) : null" class="chat-window-input ng-pristine ng-valid ng-touched" placeholder="Type a message">
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  

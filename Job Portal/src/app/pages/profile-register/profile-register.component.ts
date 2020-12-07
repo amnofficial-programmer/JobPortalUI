@@ -459,20 +459,37 @@ prepareJobSeeker(): JobSeekerModel{
 		_jobSeeker.degree=controls.degree.value;
 		_jobSeeker.companyName=controls.companyName.value;
 		_jobSeeker.college=controls.college.value;
-
+		var username = localStorage.getItem('macrax-emailId')
+		_jobSeeker.userName = username
 
 	
 	
-var funcationArea:string[]=[]
+var funcationArea:string[]=[];
 var skill:string[]=[];
-funcationArea.push(controls.functionalArea.value);
+//funcationArea= controls.functionalArea.value.join('');
 // skill.push(controls.skills1.value);
 // skill.push(controls.skills2.value);
 // skill.push(controls.skills3.value);
 // skill.push(controls.skills4.value);
+var f:string[] = [];
+//f[0] = funcationArea
+
+controls.functionalArea.value.forEach(element => {
+	funcationArea.push(element['functionalArea'])
+});
+
+controls.skills.value.forEach(element => {
+	skill.push(element['skill']);
+});
 
 _jobSeeker.functionalArea=funcationArea;
-_jobSeeker.skills=controls.skill.value;
+_jobSeeker.vedioUrl = 'https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
+_jobSeeker.docUrl ='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
+_jobSeeker.verificationCardId='2'
+_jobSeeker.verificationCardUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
+_jobSeeker.profileUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
+
+_jobSeeker.skills=skill;
 
 
 
