@@ -3,9 +3,9 @@
 
 ### Visual Studio ###
 
-/Job Portal/node_modules
-Job Portal/node_modules
-
+/Job_Portal/node_modules
+Job_Portal/node_modules
+Job_Portal/dist
 
 ### IntelliJ IDEA ###
 .idea
