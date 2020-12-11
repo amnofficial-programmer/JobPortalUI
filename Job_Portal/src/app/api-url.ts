@@ -16,7 +16,7 @@ export class Constants {
         Functional_Area:'user/functionalAreas',
         Salary_Range:'user/salaryRange',
         Skills:'user/skills',
-        Recruiter:'user/recruiter/onboarding',
+        Add_Recruiter:'user/recruiter/onboarding',
 
         Upload_Jd_File:'uplaod/jd/doc',
         Upload_Verification_Doc:'uplaod/verification/doc',

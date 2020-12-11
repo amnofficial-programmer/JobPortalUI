@@ -4,12 +4,12 @@
             {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
         </button> -->
         <mat-horizontal-stepper [linear]="isLinear" #stepper>
-            <mat-step [stepControl]="createJobSeekerCard" label="Create Job-Seeker Card">
+            <mat-step [stepControl]="createRecruiterCard" label="Create Recruiter">
                 <div class="job-bx job-profile">
                     <div class="job-bx-title clearfix">
                         <h5 class="font-weight-700 pull-left text-uppercase">Profile Information</h5>
                     </div>
-                    <form [formGroup]="createJobSeekerCard">
+                    <form [formGroup]="createRecruiterCard">
                         <div class="row m-b30">
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
@@ -17,105 +17,103 @@
                                     <input type="text" class="form-control" placeholder="Alexander Weir"
                                         formControlName="fullName">
                                         <mat-error>
-                                            <span *ngIf="!createJobSeekerCard.get('fullName').valid && createJobSeekerCard.get('fullName').touched">Your Name is required</span>
-                                          </mat-error>
+                                            <span *ngIf="!createRecruiterCard.get('fullName').valid && createRecruiterCard.get('fullName').touched">Your Name is required</span>
+                                        </mat-error>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Required Experience:</label>
-                                    <select class="form-control" formControlName="experience">
-                                        <option value="">Select from list</option>
-                                        <option value="experience.experienceRange" *ngFor="let experience of experienceList" >{{experience.experienceRange}}</option>
-                                      
-                                    </select>
-                                    <mat-error>
-                                        <span *ngIf="!createJobSeekerCard.get('experience').valid && createJobSeekerCard.get('experience').touched">Experience is required</span>
-                                      </mat-error>
+                                    <label>Your Profile Headline:</label>
+                                    <input type="text" class="form-control" placeholder="e.g HR, HR Manager"
+                                        formControlName="profileHeadline">
+                                        <mat-error>
+                                            <span *ngIf="!createRecruiterCard.get('profileHeadline').valid && createRecruiterCard.get('profileHeadline').touched">Your profile Headline is required</span>
+                                        </mat-error>
                                 </div>
                             </div>
-                           
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Company Name:</label>
                                     <input type="text" class="form-control" placeholder="e.g. Microsoft"
                                         formControlName="companyName">
                                         <mat-error>
-                                            <span *ngIf="!createJobSeekerCard.get('companyName').valid && createJobSeekerCard.get('companyName').touched">Company Name is required</span>
+                                            <span *ngIf="!createRecruiterCard.get('companyName').valid && createRecruiterCard.get('companyName').touched">Company Name is required</span>
                                           </mat-error>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Job Location:</label>
-
-                                        <select class="form-control" formControlName="jobLocation">
-                                            <option value="">Select from list</option>
-                                            <option value="joblocation.id" *ngFor="let joblocation of joblocationList" >{{joblocation.location}}</option>
-                                          
-                                        </select>
+                                        <mat-select class="form-control" formControlName="jobLocation">
+                                            <mat-option value="">Select from list</mat-option>
+                                            <mat-option [value]="joblocation.location" *ngFor="let joblocation of joblocationList" >{{joblocation.location}}</mat-option>                                       
+                                        </mat-select>
                                         <mat-error>
-                                            <span *ngIf="!createJobSeekerCard.get('jobLocation').valid && createJobSeekerCard.get('jobLocation').touched">Job Location is required</span>
-                                          </mat-error>
+                                            <span *ngIf="!createRecruiterCard.get('jobLocation').valid && createRecruiterCard.get('jobLocation').touched">Job Location is required</span>
+                                        </mat-error>
                                 </div>
                             </div>
-                           
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Your Job Role:</label>
-                                    <input type="text" class="form-control" placeholder="e.g. Microsoft"
+                                    <label>Offering Job Role:</label>
+                                    <input type="text" class="form-control" placeholder="e.g. Backend Developer, Full Stack Developer"
                                         formControlName="jobRole">
                                         <mat-error>
-                                            <span *ngIf="!createJobSeekerCard.get('jobRole').valid && createJobSeekerCard.get('jobRole').touched">Job Role is required</span>
+                                            <span *ngIf="!createRecruiterCard.get('jobRole').valid && createRecruiterCard.get('jobRole').touched">Job Role is required</span>
                                           </mat-error>
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Required Experience:</label>
+                                    <mat-select class="form-control" formControlName="experience">
+                                        <mat-option value="">Select from list</mat-option>
+                                        <mat-option [value]="experience.experienceRange" *ngFor="let experience of experienceList" >{{experience.experienceRange}}</mat-option>
+                                      
+                                    </mat-select>
+                                    <mat-error>
+                                        <span *ngIf="!createRecruiterCard.get('experience').valid && createRecruiterCard.get('experience').touched">Experience is required</span>
+                                      </mat-error>
+                                </div>
+                            </div>                          
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Offered Salary:</label>
-                                    <select class="form-control" formControlName="expected_salary">
-                                        <option value="">Select from list</option>
-                                        <option value="salary.salaryRange" *ngFor="let salary of salaryRangesList" >{{salary.salaryRange}}</option>
+                                    <mat-select class="form-control" formControlName="expected_salary">
+                                        <mat-option value="">Select from list</mat-option>
+                                        <mat-option [value]="salary.salaryRange" *ngFor="let salary of salaryRangesList" >{{salary.salaryRange}}</mat-option>
                                      
-                                    </select>
+                                    </mat-select>
                                     <mat-error>
-                                        <span *ngIf="!createJobSeekerCard.get('expected_salary').valid && createJobSeekerCard.get('expected_salary').touched">Offered Salary is required</span>
+                                        <span *ngIf="!createRecruiterCard.get('expected_salary').valid && createRecruiterCard.get('expected_salary').touched">Offered Salary is required</span>
                                       </mat-error>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                       <label>Expected College:</label>
-                                      <select class="form-control" formControlName="college">
-                                        <option value="">Select from list</option>
-                                        <option value="college.collegeName" *ngFor="let college of collegesList" >{{college.collegeName}}</option>
+                                      <mat-select class="form-control" formControlName="college">
+                                        <mat-option value="">Select from list</mat-option>
+                                        <mat-option [value]="college.collegeName" *ngFor="let college of collegesList" >{{college.collegeName}}</mat-option>
                                       
-                                    </select>
+                                    </mat-select>
                                     <mat-error>
-                                        <span *ngIf="!createJobSeekerCard.get('college').valid && createJobSeekerCard.get('college').touched">College is required</span>
+                                        <span *ngIf="!createRecruiterCard.get('college').valid && createRecruiterCard.get('college').touched">College is required</span>
                                       </mat-error>
                                </div> 
-                              </div>
-                            
-                            
-                
-                           
-
+                            </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Expected Degree:</label>
-                                    <select class="form-control" formControlName="degree">
-                                        <option value="">Select from list</option>
-                                        <option *ngFor="let degree of degreeList" value="degree.id">{{degree.degreeName}}</option>
-
-                                    </select>
+                                    <mat-select class="form-control" formControlName="degree">
+                                        <mat-option value="">Select from list</mat-option>
+                                        <mat-option *ngFor="let degree of degreeList" [value]="degree.degreeName"  (click)="onChangeDegreeCombox($event, degree.id)">{{degree.degreeName}}</mat-option>
+                                    </mat-select>
                                     <mat-error>
-                                        <span *ngIf="!createJobSeekerCard.get('degree').valid && createJobSeekerCard.get('degree').touched">Degree is required</span>
+                                        <span *ngIf="!createRecruiterCard.get('degree').valid && createRecruiterCard.get('degree').touched">Degree is required</span>
                                       </mat-error>
                                 </div>
                             </div>
-                            
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Functional Area:</label>
@@ -129,7 +127,7 @@
                                     [settings]="MultSelect">
                                   </ng-multiselect-dropdown>
                                   <mat-error>
-                                    <span *ngIf="!createJobSeekerCard.get('functionalArea').valid && createJobSeekerCard.get('functionalArea').touched">Functional Area is required</span>
+                                    <span *ngIf="!createRecruiterCard.get('functionalArea').valid && createRecruiterCard.get('functionalArea').touched">Functional Area is required</span>
                                   </mat-error>
                                     <!-- <select class="form-control" formControlName="functionalArea">
                                         <option value="">Select from list</option>
@@ -141,18 +139,17 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Department:</label>
-                                    <select class="form-control" formControlName="department">
-                                        <option value="">Select from list</option>
-                                        <option value="department.departmentName" *ngFor="let department of departmentsList"  >{{department.departmentName}}</option>
+                                    <mat-select class="form-control" formControlName="department">
+                                        <mat-option value="">Select from list</mat-option>
+                                        <mat-option [value]="department.departmentName" *ngFor="let department of departmentsList"  >{{department.departmentName}}</mat-option>
                                       
-                                    </select>
+                                    </mat-select>
                                     <mat-error>
-                                        <span *ngIf="!createJobSeekerCard.get('department').valid && createJobSeekerCard.get('department').touched">Department is required</span>
+                                        <span *ngIf="!createRecruiterCard.get('department').valid && createRecruiterCard.get('department').touched">Department is required</span>
                                       </mat-error>
                                     
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Skills:</label>
@@ -160,14 +157,12 @@
                                     [settings]="MultSelectSkill">
                                   </ng-multiselect-dropdown>
                                   <mat-error>
-                                    <span *ngIf="!createJobSeekerCard.get('skills').valid && createJobSeekerCard.get('skills').touched">Skills is required</span>
+                                    <span *ngIf="!createRecruiterCard.get('skills').valid && createRecruiterCard.get('skills').touched">Skills is required</span>
                                   </mat-error>
                                 </div>
                             </div>
-
-
                         </div>
-                        <button class="site-button m-b30">Next</button>
+                        <button class="site-button m-b30" matStepperNext>Next</button>
                     </form>
                 </div>
             </mat-step>
@@ -334,7 +329,7 @@
                         <br>
                         <div>
                             <button class="site-button m-b30 m-r30" mat-button matStepperPrevious>Back</button>
-                            <button class="site-button m-b30" mat-button >Save</button>
+                            <button class="site-button m-b30" mat-button (click)="onSave()">Save</button>
                         </div>
                     </form>
                 </div>

@@ -26,7 +26,7 @@ export class RecruiterService {
 //     createRecruiterUser(user: UserModel): Observable<ResponseModel> {
 // 		return this.http.post<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Job_Seeker, user);
 // 	}
-
+    
     getHTTPHeaders(): HttpHeaders {
         let result = new HttpHeaders();
         result = result.set('Content-Type', 'application/json');
@@ -34,9 +34,8 @@ export class RecruiterService {
 
         return result;
     }
-    createRecruiterProfile(jobSeeker:RecruiterModel):Observable<ResponseModel>{
-        return this.http.post<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Job_Seeker_Add, jobSeeker);
-
+    createRecruiterProfile(recruiter:RecruiterModel):Observable<ResponseModel>{
+        return this.http.post<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Add_Recruiter, recruiter);
     }
 
     getAllRecruiters(role:string): Observable<ResponseModel>{

@@ -523,34 +523,27 @@ console.log(this.videoResume);
 		// this.hasFormErrors = true;
 		;
 	}
-
-	// this.hasFormErrors = false;
 	const controls2 = this.verification.controls;
-console.log(this.verification);
+	console.log(this.verification);
 	/** check form */
 	if (this.verification.invalid) {
 		Object.keys(controls2).forEach(controlName =>
 			controls2[controlName].markAsTouched()
 		);
-
-		// this.hasFormErrors = true;
 		return;
 	}
 
 	const jobSeekerObj=this.prepareJobSeeker();
-this.jobSeekerService.createJobSeekerProfile(jobSeekerObj).subscribe(res=>{
-if(res.status==200){
-	alert(res.msg);
+	this.jobSeekerService.createJobSeekerProfile(jobSeekerObj).subscribe(res=>{
+	if(res.status==200){
+		alert(res.msg);
+		this.router.navigateByUrl('dashboard/chat-home');
+	}else{
+		alert(res.msg);
+	}
+	},err=>{
 
-	this.router.navigateByUrl('dashboard/chat-home');
-}else{
-	alert(res.msg);
-}
-
-
-},err=>{
-
-})
+	})
 
 
 }
