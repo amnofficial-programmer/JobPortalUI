@@ -38,10 +38,58 @@ export class ChatClientComponent implements OnInit {
     this.currentRight = 0;
     this.userMessage='';
     this.flag=false;
-    this.userId = 101;
     this.recruiter = [];
     this.userName = localStorage.getItem('macrax-emailId');
+    this.userId = this.setUserId();
+  }
 
+  setUserId(){
+    let role = localStorage.getItem('role');
+    let id = 0
+    if(role === '0'){
+      this.jobSeekerService.getAllJobSeekers('0').subscribe((res)=>{
+        if(res.status==200){
+          //this.users=res.data;
+          res.data.forEach(element => {
+            let normalUser = new UserModel();
+            normalUser.deserialize(element);
+            if(normalUser.userName == this.userName){
+              id = normalUser.id
+            }
+          });
+          
+        }else{
+          id = 0 ;
+        }
+        
+        },err=>{
+          id = 0;
+        });
+    }
+
+    if(role === '1'){
+      let jobseekers= []
+      this.recruiterService.getAllRecruiters('1').subscribe((res)=>{
+        if(res.status==200){
+          //this.users=res.data;
+          res.data.forEach(element => {
+            let normalUser = new UserModel();
+            normalUser.deserialize(element);
+            if(normalUser.userName == this.userName){
+              id = normalUser.id
+            }
+          });
+          
+        }else{
+          id = 0 ;
+        }
+        
+        },err=>{
+          id = 0;
+        });
+    }
+    
+    return id;
   }
 
   ngOnInit(): void {
@@ -52,10 +100,10 @@ export class ChatClientComponent implements OnInit {
           if(u.messages === undefined){
             u.messages = [];
           }
-          if(message['from'] === u.userName.toString()){
+          if(message['from'] === u.id.toString()){
             u.messages.push(message);
           }
-          if(message['to'] === u.userName.toString()){
+          if(message['to'] === u.id.toString()){
             u.messages.push(message);
           }
       })
@@ -185,16 +233,12 @@ export class ChatClientComponent implements OnInit {
     this.chatServie.setupChatRoom(from,to);
   }
 
-  // selectUserId(){
-  //   this.userId = this.
-  // }
-
   sendMessage(event, user){
     this.message = new Message();
 
     let from = localStorage.getItem('macrax-emailId')
-    this.message['from'] = this.userName;
-    this.message['to'] = user.userName.toString();
+    this.message['from'] = this.userId.toString();
+    this.message['to'] = user.id.toString();
     this.message['text'] = event.target.value;
     this.message['time'] = formatDate(new Date(), 'dd/MM/yy hh:mm a', 'en-US', '+0530');
 

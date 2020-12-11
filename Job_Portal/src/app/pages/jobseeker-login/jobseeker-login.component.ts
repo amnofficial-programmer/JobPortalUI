@@ -47,6 +47,7 @@ export class JobseekerLoginComponent implements OnInit {
         const responseObj=res['data'];
         localStorage.setItem('macrax-token',responseObj.token);
         localStorage.setItem('macrax-emailId',responseObj.userName);
+        localStorage.setItem('macrax-password',this.loginFormJobSeeker.value.password);
         localStorage.setItem('role','0');
         if(responseObj.IsOnboard==0){
           this.router.navigateByUrl('/dashboard/job-seeker-profilereg')

@@ -12,6 +12,7 @@ export class UserModel implements Deserializable{
   ipAddress:string;
   rightPosition:string;
   messages: Message[];
+  otp: string;
 
   UserModel(){
     this.id = 0;
@@ -22,6 +23,7 @@ export class UserModel implements Deserializable{
     this.ipAddress = '';
     this.rightPosition = '';
     this.messages = [];
+    this.otp = '';
   }
 
   deserialize(input: any): this {

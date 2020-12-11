@@ -48,8 +48,8 @@ export class SmsService {
         //     .set('x-rapidapi-key', 'c4211c398emsh86eb1cad5fbcfbbp14b4c1jsn7e91a0ab752b')
         //     .set( "useQueryString", 'true');
             let userName = localStorage.getItem('macrax-emailId')
-            const httpHeaders = this.getHTTPHeaders();
-            return this.http.get<ResponseModel>(Constants.URL.HOST_URL+this.url+data['userName'],{ headers: httpHeaders,});
+            //const httpHeaders = this.getHTTPHeaders();
+            return this.http.get<ResponseModel>(Constants.URL.HOST_URL+this.url+data['userName']);
 
      
         //return this.http.post(this.url,data,{headers: httpHeaders });

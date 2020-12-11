@@ -43,7 +43,7 @@ prepareUser():UserModel{
     _user.password =controls.password.value;
     _user.mobileNo =controls.mobileNo.value;
     _user.role =Constants.Roles.Job_Seeker;
-
+    _user.otp = controls.otp.value;
     return _user;
 
 }

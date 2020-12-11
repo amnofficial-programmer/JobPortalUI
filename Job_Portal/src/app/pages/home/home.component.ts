@@ -12,4 +12,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  isLoggedInUser(){
+    //localStorage.setItem('macrax-emailId',responseObj.userName);
+    //localStorage.setItem('macrax-password',this.loginFormJobSeeker.value.password);
+    //const userName = localStorage.getItem('macrax-emailId');
+    //const password = localStorage.getItem('macrax-password');
+
+  }
+
 }
