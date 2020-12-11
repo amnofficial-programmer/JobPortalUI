@@ -5148,9 +5148,8 @@ WindowService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInj
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SmsService", function() { return SmsService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
-/* harmony import */ var _api_url__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api-url */ "0UPu");
-
+/* harmony import */ var _api_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api-url */ "0UPu");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 
 
 
@@ -5162,35 +5161,15 @@ class SmsService {
         this.url = 'otp/generateOtp?userName=';
         this.token = localStorage.getItem('macrax-token');
     }
-    getHTTPHeaders() {
-        let result = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]();
-        result = result.set('Content-Type', 'application/json');
-        result = result.set('Authorization', 'Bearer ' + this.token);
-        return result;
-    }
     sendOtp(data) {
-        // req.headers({
-        //     "authorization": "Basic TUFDUkFYOk9mZmljaWFsQDEyMzQ1",
-        //     "x-rapidapi-host": "d7sms.p.rapidapi.com",
-        //     "x-rapidapi-key": "c4211c398emsh86eb1cad5fbcfbbp14b4c1jsn7e91a0ab752b",
-        //     "useQueryString": true
-        // });
-        // let httpHeaders = new HttpHeaders()
-        //     .set('authorization', 'Basic TUFDUkFYOk9mZmljaWFsQDEyMzQ1')
-        //     .set('x-rapidapi-host', 'd7sms.p.rapidapi.com')
-        //     .set('x-rapidapi-key', 'c4211c398emsh86eb1cad5fbcfbbp14b4c1jsn7e91a0ab752b')
-        //     .set( "useQueryString", 'true');
-        let userName = localStorage.getItem('macrax-emailId');
-        //const httpHeaders = this.getHTTPHeaders();
-        return this.http.get(_api_url__WEBPACK_IMPORTED_MODULE_2__["Constants"].URL.HOST_URL + this.url + data['userName']);
-        //return this.http.post(this.url,data,{headers: httpHeaders });
+        return this.http.get(_api_url__WEBPACK_IMPORTED_MODULE_1__["Constants"].URL.HOST_URL + this.url + data['userName']);
     }
 }
-SmsService.ɵfac = function SmsService_Factory(t) { return new (t || SmsService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
+SmsService.ɵfac = function SmsService_Factory(t) { return new (t || SmsService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };
 SmsService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: SmsService, factory: SmsService.ɵfac });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SmsService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"]
-    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }]; }, null); })();
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }]; }, null); })();
 
 
 /***/ }),
@@ -6665,6 +6644,7 @@ class RecruiterSignupComponent {
         _user.password = controls.password.value;
         _user.mobileNo = controls.mobileNo.value;
         _user.role = src_app_api_url__WEBPACK_IMPORTED_MODULE_3__["Constants"].Roles.Recuriter;
+        _user.otp = controls.otp.value;
         return _user;
     }
     isControlInvalid(controlName) {
