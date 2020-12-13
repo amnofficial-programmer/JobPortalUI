@@ -7,9 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 
 import {MatSelectModule} from '@angular/material/select';
 
-
-
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './pages/common/header/header.component';
 import { FooterComponent } from './pages/common/footer/footer.component';
@@ -50,6 +47,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { RecruiterForgetPasswordComponent } from './pages/recruiter-forget-password/recruiter-forget-password.component';
 import { DemoComponentComponent } from './demo-component/demo-component.component';
 import { ChatClientComponent } from './pages/chat-client/chat-client.component';
+import {NgxWebstorageModule} from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -96,8 +94,8 @@ import { ChatClientComponent } from './pages/chat-client/chat-client.component';
     NgMultiSelectDropDownModule.forRoot(),
     MultiselectDropdownModule,
     NgxDropzoneModule,
-    MatSelectModule
-   
+    MatSelectModule,
+    NgxWebstorageModule.forRoot(), 
   ],
   
   // exports: [

@@ -6,6 +6,7 @@ import { ChatService } from '../../services/chat.service';
 import { WindowService } from '../../services/window.service';
 import { RecruiterService } from 'src/app/services/recruiter.service';
 import { JobSeekerService } from 'src/app/services/job-seeker.service';
+import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-chat-client',
@@ -17,7 +18,7 @@ export class ChatClientComponent implements OnInit {
   messages:Message[];
   users:UserModel[];
   currentRight :number;
-  userId:number;
+  userId:string;
 
   recruiter : UserModel[]=[];
 
@@ -31,7 +32,11 @@ export class ChatClientComponent implements OnInit {
   @ViewChild('ngChatWindowContainer',{static:false}) ngChatWindowContainer:ElementRef;
   @ViewChildren('ngChatWindow') ngChatWindow:QueryList<ElementRef>;
 
-  constructor(private chatServie : ChatService, private windowService: WindowService, private recruiterService:RecruiterService, private jobSeekerService: JobSeekerService) { 
+  constructor(private chatServie : ChatService, 
+              private windowService: WindowService, 
+              private recruiterService:RecruiterService, 
+              private jobSeekerService: JobSeekerService,
+              private sessionStore: SessionStorageService) { 
     this.messages = [];
     this.users = [];
     this.ngChatWindows= [];
@@ -44,52 +49,8 @@ export class ChatClientComponent implements OnInit {
   }
 
   setUserId(){
-    let role = localStorage.getItem('role');
-    let id = 0
-    if(role === '0'){
-      this.jobSeekerService.getAllJobSeekers('0').subscribe((res)=>{
-        if(res.status==200){
-          //this.users=res.data;
-          res.data.forEach(element => {
-            let normalUser = new UserModel();
-            normalUser.deserialize(element);
-            if(normalUser.userName == this.userName){
-              id = normalUser.id
-            }
-          });
-          
-        }else{
-          id = 0 ;
-        }
-        
-        },err=>{
-          id = 0;
-        });
-    }
-
-    if(role === '1'){
-      let jobseekers= []
-      this.recruiterService.getAllRecruiters('1').subscribe((res)=>{
-        if(res.status==200){
-          //this.users=res.data;
-          res.data.forEach(element => {
-            let normalUser = new UserModel();
-            normalUser.deserialize(element);
-            if(normalUser.userName == this.userName){
-              id = normalUser.id
-            }
-          });
-          
-        }else{
-          id = 0 ;
-        }
-        
-        },err=>{
-          id = 0;
-        });
-    }
-    
-    return id;
+    let id = this.sessionStore.retrieve('macrax-userId'); 
+    return id.toString();
   }
 
   ngOnInit(): void {
@@ -111,7 +72,7 @@ export class ChatClientComponent implements OnInit {
 
     });
 
-    let role = localStorage.getItem('role');
+    let role = this.sessionStore.retrieve('role');
     if(role == '0'){
       this.getAllRecruiters();
     }else{
@@ -160,7 +121,7 @@ export class ChatClientComponent implements OnInit {
   }
 
   isCurrentUser(from){
-    if(this.userName === from){
+    if(this.userId === from){
       return true;
     }
     return false;
@@ -226,7 +187,7 @@ export class ChatClientComponent implements OnInit {
   }
 
   createRoomWithUser(user){
-    this.joinRoom(this.userName,user.userName.toString())
+    this.joinRoom(this.userId,user.id.toString())
   }
 
   joinRoom(from: string,to: string){
@@ -244,6 +205,7 @@ export class ChatClientComponent implements OnInit {
 
     //this.messages.push(this.message);
     this.chatServie.sendMessage(this.message);
+    
   }
 
   checkChatWindowCanBePlcaed(){

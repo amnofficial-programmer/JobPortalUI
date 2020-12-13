@@ -74,7 +74,7 @@
   
         <div  class="ng-chat-footer primary-outline-color primary-background">
   
-          <input type="text" (keyup)="$event.keyCode == 13 ? sendMessage($event, user) : null" class="chat-window-input ng-pristine ng-valid ng-touched" placeholder="Type a message">
+          <input type="text" #inputMessage (keyup)="$event.keyCode == 13 ? sendMessage($event, user) : null" class="chat-window-input ng-pristine ng-valid ng-touched" placeholder="Type a message">
         </div>
       </div>
     </div>

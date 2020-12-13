@@ -32,44 +32,25 @@ export class ProfileRegisterComponent implements OnInit {
 	uploadResume: FormGroup;
 	verification: FormGroup;
 	chatWithRecruiter: FormGroup;
-
-	states:any[]
-
-collegesList:CollegeModel[]=[];
-departmentsList:DepartmentModel[]=[];
-degreeList:DegreeModel[]=[];
-functaionAreaList:FunctionalAreaModel[]=[];
-skillList:SkillInfoModel[]=[];
-experienceList:ExperienceModel[]=[];
-salaryRangesList:SalaryInfoModel[]=[];
-
-
-
-// disabled = false;
-// ShowFilter = false;
-// limitSelection = false;
-// funcationAreaDropDownList:FuncationAreaDropDown[]=[]
-// selectedItems: any = [];
-// dropdownSettings: any = {};
-
-
-selectedItems = [];
-// dropdownSettings : IMultiSelectSettings={};
-funcationAreaList = new Array();
-funcationArea = "";
-
-MultSelect : any= {};
-selectedAreas :any =[];
-MultSelectSkill : any= {};
+	collegesList:CollegeModel[]=[];
+	departmentsList:DepartmentModel[]=[];
+	degreeList:DegreeModel[]=[];
+	functaionAreaList:FunctionalAreaModel[]=[];
+	skillList:SkillInfoModel[]=[];
+	experienceList:ExperienceModel[]=[];
+	salaryRangesList:SalaryInfoModel[]=[];
+	selectedItems = [];
+	funcationAreaList = new Array();
+	funcationArea = "";
+	MultSelect : any= {};
+	selectedAreas :any =[];
+	MultSelectSkill : any= {};
 	ids :any =[];
 	constructor(private _formBuilder: FormBuilder,private router:Router,private jobSeekerService:JobSeekerService,elementRef: ElementRef,private uploadService:FileUploadService) { 
 
-
 		this.player = false;
-
 		// save reference to plugin (so it initializes)
 		this.plugin = Record;
-	
 		// video.js configuration
 		this.config = {
 		  controls: true,
@@ -84,31 +65,6 @@ MultSelectSkill : any= {};
 			volumePanel: false
 		  },
 		  plugins: {
-			/*
-			// wavesurfer section is only needed when recording audio-only
-			wavesurfer: {
-				backend: 'WebAudio',
-				waveColor: '#36393b',
-				progressColor: 'black',
-				debug: true,
-				cursorWidth: 1,
-				displayMilliseconds: true,
-				hideScrollbar: true,
-				plugins: [
-					// enable microphone plugin
-					WaveSurfer.microphone.create({
-						bufferSize: 4096,
-						numberOfInputChannels: 1,
-						numberOfOutputChannels: 1,
-						constraints: {
-							video: false,
-							audio: true
-						}
-					})
-				]
-			},
-			*/
-			// configure videojs-record plugin
 			record: {
 			  audio: true,
 			  video: true,
@@ -126,44 +82,11 @@ MultSelectSkill : any= {};
 		this.getAllSararyRanges();
 		this.getAllColleges();
 		this.getAllDegree();
-		// this.getAllDepartments();
 		this.getAllExprience();
-	
 		this.getAllFuncationalArea();
-		// this.getAllSkills();
-
-		this.states = [
-			{
-				name : 'MH'
-			},{
-				name : 'GJ'
-			},
-			{
-				name : 'KR'
-			}
-		]
-
-		
-	
-	// this.configDropDownSetting();
 	}
-	// id:number;
-	// functionalArea:string;
-configDropDownSetting(){
-	// this.dropdownSettings = {
-	// 	singleSelection: false,
-	// 	text: "Select Health History",
-	// 	selectAllText: 'Select All',
-	// 	unSelectAllText: 'UnSelect All',
-	// 	enableSearchFilter: true,
-	// 	// classes:"myclass custom-class"
-	//   };
-
-}
 
 
-
-//get all 
 	getAllColleges(){
 		this.jobSeekerService.getAllColleges().subscribe(res=>{
 		console.log(res);
@@ -177,157 +100,88 @@ configDropDownSetting(){
 		  
 		});
 		}
- getAllDepartments(id){
+	getAllDepartments(id){
 
-
-	this.jobSeekerService.getAllDepartments(id).subscribe(res=>{
-		console.log(res);
-		if(res.status==200){
-			this.departmentsList=res.data;
-		}else{
-			alert(res.msg)
-		}
-		
-		},err=>{
-		  
-		});
- }
-getAllDegree(){
-	this.jobSeekerService.getAllDegrees().subscribe(res=>{
-		console.log(res);
-		if(res.status==200){
-			this.degreeList=res.data;
-		}else{
-			alert(res.msg)
-		}
-		
-		},err=>{
-		  
-		});
-}
-getAllFuncationalArea(){
-	this.jobSeekerService.getAllFunctionalAreas().subscribe(res=>{
-		console.log(res);
-		if(res.status==200){
-
-			this.configDropDownSetting();
-	this.functaionAreaList=res.data;
-			// this.functaionAreaList.forEach(element=>{
-			// 	this.funcationAreaList.push({'id':element.id,'itemName':element.functionalArea});
-			// })
-		
-			// this.funcationAreaList = []
-			// this.funcationAreaList.push({'id':1,'functionalArea':'functionalArea1'});
-			// this.funcationAreaList.push({'id':2,'functionalArea':'functionalArea2'});
-			// this.funcationAreaList.push({'id':3,'functionalArea':'functionalArea3'});
-			// this.funcationAreaList.push({'id':4,'functionalArea':'functionalArea4'});
-			// this.funcationAreaList.push({'id':5,'functionalArea':'functionalArea1'});
-			// this.funcationAreaList.push({'id':6,'functionalArea':'functionalArea2'});
-			// this.funcationAreaList.push({'id':7,'functionalArea':'functionalArea3'});
-			// this.funcationAreaList.push({'id':8,'functionalArea':'functionalArea4'});
+		this.jobSeekerService.getAllDepartments(id).subscribe(res=>{
+			console.log(res);
+			if(res.status==200){
+				this.departmentsList=res.data;
+			}else{
+				alert(res.msg)
+			}
 			
-			console.log("Area Lists"+this.functaionAreaList);
-		}else{
-			alert(res.msg)
-		}
-		
-		},err=>{
-			// this.funcationAreaList = []
-			// this.funcationAreaList.push({'id':1,'functionalArea':'functionalArea1'});
-			// this.funcationAreaList.push({'id':2,'functionalArea':'functionalArea2'});
-			// this.funcationAreaList.push({'id':3,'functionalArea':'functionalArea3'});
-			// this.funcationAreaList.push({'id':4,'functionalArea':'functionalArea4'});
-			// this.funcationAreaList.push({'id':5,'functionalArea':'functionalArea1'});
-			// this.funcationAreaList.push({'id':6,'functionalArea':'functionalArea2'});
-			// this.funcationAreaList.push({'id':7,'functionalArea':'functionalArea3'});
-			// this.funcationAreaList.push({'id':8,'functionalArea':'functionalArea4'});
-
+			},err=>{
 			
-			// console.log("Area Lists"+this.funcationAreaList);
-		});
-}
-getAllSkills(ids){
-	debugger
-	this.jobSeekerService.getAllSkills(ids).subscribe(res=>{
-		console.log(res);
-		if(res.status==200){
-			this.skillList=res.data;
-			// this.skillList = []
-			// this.skillList.push({'id':1,'skill':'skill1',functionalAreaId:1});
-			// this.skillList.push({'id':2,'skill':'skill2',functionalAreaId:1});
-			// this.skillList.push({'id':3,'skill':'skill3',functionalAreaId:1});
-			// this.skillList.push({'id':4,'skill':'skill4',functionalAreaId:1});
-			// this.skillList.push({'id':5,'skill':'skill1',functionalAreaId:1});
-			// this.skillList.push({'id':6,'skill':'skill2',functionalAreaId:1});
-			// this.skillList.push({'id':7,'skill':'skill3',functionalAreaId:1});
-			// this.skillList.push({'id':8,'skill':'skill4',functionalAreaId:1});
+			});
+	}
+	getAllDegree(){
+		this.jobSeekerService.getAllDegrees().subscribe(res=>{
+			console.log(res);
+			if(res.status==200){
+				this.degreeList=res.data;
+			}else{
+				alert(res.msg)
+			}
 			
-			console.log("Skill Lists"+this.skillList);
-		}else{
-			alert(res.msg)
-		}
-		
-		},err=>{
-			// this.skillList = []
-			// this.skillList.push({'id':1,'skill':'skill1',functionalAreaId:1});
-			// this.skillList.push({'id':2,'skill':'skill2',functionalAreaId:1});
-			// this.skillList.push({'id':3,'skill':'skill3',functionalAreaId:1});
-			// this.skillList.push({'id':4,'skill':'skill4',functionalAreaId:1});
-			// this.skillList.push({'id':5,'skill':'skill1',functionalAreaId:1});
-			// this.skillList.push({'id':6,'skill':'skill2',functionalAreaId:1});
-			// this.skillList.push({'id':7,'skill':'skill3',functionalAreaId:1});
-			// this.skillList.push({'id':8,'skill':'skill4',functionalAreaId:1});
+			},err=>{
 			
-			// console.log("Skill Lists"+this.skillList);
-		});
-}
-getAllExprience(){
-	this.jobSeekerService.getAllExperience().subscribe(res=>{
-		console.log(res);
-		if(res.status==200){
-			this.experienceList=res.data;
-		}else{
-			alert(res.msg)
-		}
-		
+			});
+	}
+	getAllFuncationalArea(){
+		this.jobSeekerService.getAllFunctionalAreas().subscribe(res=>{
+			console.log(res);
+			if(res.status==200){
+			this.functaionAreaList=res.data;
+			
+				console.log("Area Lists"+this.functaionAreaList);
+			}else{
+				alert(res.msg)
+			}
+			
 		},err=>{
-		  
+				
 		});
-}
-getAllSararyRanges(){
-	this.jobSeekerService.getAllSalaryRanges().subscribe(res=>{
-		console.log(res);
-		if(res.status==200){
-			this.salaryRangesList=res.data;
-		}else{
-			alert(res.msg)
-		}
-		
-		},err=>{
-		  
-		});
-}
-
-
-
-
-
-
-
-// ngOnInit() {
-	// this.cities = [
-	// 	{ item_id: 1, item_text: 'New Delhi' },
-	// 	{ item_id: 2, item_text: 'Mumbai' },
-	// 	{ item_id: 3, item_text: 'Bangalore' },
-	// 	{ item_id: 4, item_text: 'Pune' },
-	// 	{ item_id: 5, item_text: 'Chennai' },
-	// 	{ item_id: 6, item_text: 'Navsari' }
-	// ];
-	// this.selectedItems = [{ item_id: 4, item_text: 'Pune' }, { item_id: 6, item_text: 'Navsari' }];
-	
-	
-
-
+	}
+	getAllSkills(ids){
+		debugger
+		this.jobSeekerService.getAllSkills(ids).subscribe(res=>{
+			console.log(res);
+			if(res.status==200){
+				this.skillList=res.data;
+			}else{
+				alert(res.msg)
+			}
+			
+			},err=>{
+				
+			});
+	}
+	getAllExprience(){
+		this.jobSeekerService.getAllExperience().subscribe(res=>{
+			console.log(res);
+			if(res.status==200){
+				this.experienceList=res.data;
+			}else{
+				alert(res.msg)
+			}
+			
+			},err=>{
+			
+			});
+	}
+	getAllSararyRanges(){
+		this.jobSeekerService.getAllSalaryRanges().subscribe(res=>{
+			console.log(res);
+			if(res.status==200){
+				this.salaryRangesList=res.data;
+			}else{
+				alert(res.msg)
+			}
+			
+			},err=>{
+			
+			});
+	}
 
 	onItemSelect(item: any) {
 		//debugger
@@ -360,93 +214,65 @@ getAllSararyRanges(){
 	
 	  }
 	 
-	  onDeSelectAll(items: any) {
+	onDeSelectAll(items: any) {
 		console.log(items);
 		this.ids = items
 		this.ids = []
 
-}
+	}
 
 
-	  onItemSelectSkill(item: any) {
+	onItemSelectSkill(item: any) {
 		console.log(item);
 		
 	  }
-	 
 
+	createForm(){
 
-
-
-
-
-createForm(){
-
-	this.createJobSeekerCard = this._formBuilder.group({
-		fullName: ['', Validators.required],
-		profileHeadline: ['', Validators.required],
-		college: ['', Validators.required],
+		this.createJobSeekerCard = this._formBuilder.group({
+			fullName: ['', Validators.required],
+			profileHeadline: ['', Validators.required],
+			college: ['', Validators.required],
+			
+			companyName: ['', Validators.required],
+			department: ['', ],
+			//Validators.required
+			degree: ['', Validators.required],
+			experience: ['', Validators.required],
+			functionalArea: [[], Validators.required],
+			expected_salary: ['', Validators.required],
+			skills: [[], Validators.required]
+		});
 		
-		companyName: ['', Validators.required],
-		department: ['', ],
-		//Validators.required
-		degree: ['', Validators.required],
-		experience: ['', Validators.required],
-		functionalArea: [[], Validators.required],
-		expected_salary: ['', Validators.required],
-		// skill1: ['', Validators.required],
-		// skill2: ['', Validators.required],
-		// skill3: ['', Validators.required],
-		// skill4: ['', Validators.required]
-		skills: [[], Validators.required]
-	});
-	// this.createJobSeekerCard = new FormGroup({
-	// 	fullName: new FormControl(''),
-	// 	profileHeadline: new FormControl(''),
-	// 	college: new FormControl(''),
-		
-	// 	companyName: new FormControl(''),
-	// 	department: new FormControl(''),
-	// 	//Validators.required
-	// 	degree: new FormControl(''),
-	// 	experience: new FormControl(''),
-	// 	functionalArea: new FormControl([]),
-	// 	expected_salary: new FormControl([]),
-	// 	// skill1: ['', Validators.required],
-	// 	// skill2: ['', Validators.required],
-	// 	// skill3: ['', Validators.required],
-	// 	// skill4: ['', Validators.required]
-	// 	skills: new FormControl([]),
-	// });
+		this.videoResume = this._formBuilder.group({
+			uploadVideo: ['', Validators.required]
+		});
+		this.uploadResume = this._formBuilder.group({
+			uploadResume: ['', Validators.required]
+		});
+		this.verification = this._formBuilder.group({
+			selectDocumentType: ['', Validators.required],
+			uploadDocument: ['', Validators.required]
+		});
 
-	this.videoResume = this._formBuilder.group({
-		uploadVideo: ['', Validators.required]
-	});
-	this.uploadResume = this._formBuilder.group({
-		uploadResume: ['', Validators.required]
-	});
-	this.verification = this._formBuilder.group({
-		selectDocumentType: ['', Validators.required],
-		uploadDocument: ['', Validators.required]
-	});
+		this.createJobSeekerCard.patchValue({college : 'Select College'});
+	}
 
-	this.createJobSeekerCard.patchValue({college : 'Select College'});
-}
+	onChangeDegreeCombox(event, degreeName){
+		let obj = this.degreeList.find(x => x.degreeName === degreeName);
+		this.getAllDepartments(obj.id);
+	}
+	onChangeFunctionaAreaCombox(id){
+	this.getAllSkills(id);
+	}
 
-onChangeDegreeCombox(event, degreeName){
-	let obj = this.degreeList.find(x => x.degreeName === degreeName);
-	this.getAllDepartments(obj.id);
-}
-onChangeFunctionaAreaCombox(id){
-this.getAllSkills(id);
-}
+	onChangeDepartmentCombox(department){
 
-onChangeDepartmentCombox(department){
-
-}
+	}
 
 
 
-prepareJobSeeker(): JobSeekerModel{
+	prepareJobSeeker(): JobSeekerModel{
 	
 		const controls = this.createJobSeekerCard.controls;
 		const _jobSeeker = new JobSeekerModel();
@@ -464,100 +290,83 @@ prepareJobSeeker(): JobSeekerModel{
 
 	
 	
-var funcationArea:string[]=[];
-var skill:string[]=[];
-//funcationArea= controls.functionalArea.value.join('');
-// skill.push(controls.skills1.value);
-// skill.push(controls.skills2.value);
-// skill.push(controls.skills3.value);
-// skill.push(controls.skills4.value);
-var f:string[] = [];
-//f[0] = funcationArea
+		var funcationArea:string[]=[];
+		var skill:string[]=[];
+		var f:string[] = [];
 
-controls.functionalArea.value.forEach(element => {
-	funcationArea.push(element['functionalArea'])
-});
+		controls.functionalArea.value.forEach(element => {
+			funcationArea.push(element['functionalArea'])
+		});
 
-controls.skills.value.forEach(element => {
-	skill.push(element['skill']);
-});
+		controls.skills.value.forEach(element => {
+			skill.push(element['skill']);
+		});
 
-_jobSeeker.functionalArea=funcationArea;
-_jobSeeker.vedioUrl = 'https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
-_jobSeeker.docUrl ='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
-_jobSeeker.verificationCardId='2'
-_jobSeeker.verificationCardUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
-_jobSeeker.profileUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
+		_jobSeeker.functionalArea=funcationArea;
+		_jobSeeker.vedioUrl = 'https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
+		_jobSeeker.docUrl ='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
+		_jobSeeker.verificationCardId='2'
+		_jobSeeker.verificationCardUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
+		_jobSeeker.profileUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
 
-_jobSeeker.skills=skill;
-
-
-
+		_jobSeeker.skills=skill;
 		return _jobSeeker
-}
-onSave(){
-
-
-	// this.hasFormErrors = false;
-	const controls = this.createJobSeekerCard.controls;
-console.log(this.createJobSeekerCard);
-	/** check form */
-	if (this.createJobSeekerCard.invalid) {
-		Object.keys(controls).forEach(controlName =>
-			controls[controlName].markAsTouched()
-		);
-
-		// this.hasFormErrors = true;
-		;
 	}
+	onSave(){
+		const controls = this.createJobSeekerCard.controls;
 
-// this.hasFormErrors = false;
-const controls1 = this.videoResume.controls;
-console.log(this.videoResume);
-	/** check form */
-	if (this.videoResume.invalid) {
-		Object.keys(controls1).forEach(controlName =>
-			controls1[controlName].markAsTouched()
-		);
+		/** check form */
+		if (this.createJobSeekerCard.invalid) {
+			Object.keys(controls).forEach(controlName =>
+				controls[controlName].markAsTouched()
+			);
+		}
 
-		// this.hasFormErrors = true;
-		;
-	}
-	const controls2 = this.verification.controls;
-	console.log(this.verification);
-	/** check form */
-	if (this.verification.invalid) {
-		Object.keys(controls2).forEach(controlName =>
-			controls2[controlName].markAsTouched()
-		);
-		return;
-	}
+		// this.hasFormErrors = false;
+		const controls1 = this.videoResume.controls;
+		console.log(this.videoResume);
+			/** check form */
+			if (this.videoResume.invalid) {
+				Object.keys(controls1).forEach(controlName =>
+					controls1[controlName].markAsTouched()
+				);
 
-	const jobSeekerObj=this.prepareJobSeeker();
-	this.jobSeekerService.createJobSeekerProfile(jobSeekerObj).subscribe(res=>{
-	if(res.status==200){
-		alert(res.msg);
-		this.router.navigateByUrl('dashboard/chat-home');
-	}else{
-		alert(res.msg);
-	}
-	},err=>{
+				// this.hasFormErrors = true;
+				;
+			}
+			const controls2 = this.verification.controls;
+			console.log(this.verification);
+			/** check form */
+			if (this.verification.invalid) {
+				Object.keys(controls2).forEach(controlName =>
+					controls2[controlName].markAsTouched()
+				);
+				return;
+			}
 
-	})
+			const jobSeekerObj=this.prepareJobSeeker();
+			this.jobSeekerService.createJobSeekerProfile(jobSeekerObj).subscribe(res=>{
+			if(res.status==200){
+				alert(res.msg);
+				this.router.navigateByUrl('dashboard/chat-home');
+			}else{
+				alert(res.msg);
+			}
+			},err=>{
 
-
+			})
 }
 
-  // reference to the element itself: used to access events and methods
-  private _elementRef: ElementRef
+	// reference to the element itself: used to access events and methods
+	private _elementRef: ElementRef
 
-  // index to create unique ID for component
-  idx = 'clip1';
+	// index to create unique ID for component
+	idx = 'clip1';
 
-  private config: any;
-  private player: any; 
-  private plugin: any;
-  ifAllowCamera:boolean=false;
+	private config: any;
+	private player: any; 
+	private plugin: any;
+	ifAllowCamera:boolean=false;
   
   // use ngAfterViewInit to make sure we initialize the videojs element
   // after the component template itself has been rendered
@@ -612,97 +421,85 @@ console.log(this.videoResume);
     });
   }
   uploadVideo(video){
-	
-this.uploadService.uploadJdVideo(video).subscribe(res=>{
-		this.videoResume.controls['uploadVideo'].setValue(res);
-		console.log(res);
-	},err=>{
-	
-	});
-	  }
+		this.uploadService.uploadJdVideo(video).subscribe(res=>{
+				this.videoResume.controls['uploadVideo'].setValue(res);
+				console.log(res);
+			},err=>{
+			
+		});
+  	}
   // use ngOnDestroy to detach event handlers and remove the player
   ngOnDestroy() {
-    if (this.player) {
-      this.player.dispose();
-      this.player = false;
-    }
-  }
+		if (this.player) {
+		this.player.dispose();
+		this.player = false;
+		}
+  	}
 
-
-
-
-
-//   allowCamera(){
-
-// this.ifAllowCamera=true;
-// }
-
-//file upload
-
-files: File[] = [];
+	files: File[] = [];
  
-onSelect(event) {
-  console.log(event);
-  this.files.push(...event.rejectedFiles);
-  this.uploadResumeFile();
-}
- 
-onRemove(event) {
-  console.log(event);
-  this.files.splice(this.files.indexOf(event), 1);
-}
-
-uploadResumeFile(){
-if(this.files.length>0){
-	this.uploadService.uploadJdFile(this.files[0]).subscribe(res=>{
-		console.log(res);
-			this.uploadResume.controls['uploadResume'].setValue(res);
-	},err=>{
-
-	})
-}
-}
-
-files1: File[] = [];
- 
-onSelect1(event) {
-  console.log(event);
-  this.files1.push(...event.rejectedFiles);
-  this.uploadDocumentFile();
-}
- 
-onRemove1(event) {
-  console.log(event);
-  this.files1.splice(this.files1.indexOf(event), 1);
-}
-
-
-uploadDocumentFile(){
-	if(this.files1.length>0){
-		this.uploadService.verificationDocFile(this.files1[0]).subscribe(res=>{
-		
-				this.verification.controls['uploadDocument'].setValue(res);
-				console.log(res);
-			
-		},err=>{
+	onSelect(event) {
+	console.log(event);
+	this.files.push(...event.rejectedFiles);
+	this.uploadResumeFile();
+	}
 	
+	onRemove(event) {
+	console.log(event);
+	this.files.splice(this.files.indexOf(event), 1);
+	}
+
+	uploadResumeFile(){
+	if(this.files.length>0){
+		this.uploadService.uploadJdFile(this.files[0]).subscribe(res=>{
+			console.log(res);
+				this.uploadResume.controls['uploadResume'].setValue(res);
+		},err=>{
+
 		})
 	}
 	}
-	// City Names
-	City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan']
-// Choose city using select dropdown
-changeCity(e) {
-    console.log(e.value)
-    this.college.setValue(e.target.value, {
-      onlySelf: true
-    })
-  }
 
-  // Getter method to access formcontrols
-  get college() {
-    return this.createJobSeekerCard.get('college');
-  }
+	files1: File[] = [];
+	
+	onSelect1(event) {
+		console.log(event);
+		this.files1.push(...event.rejectedFiles);
+		this.uploadDocumentFile();
+	}
+	
+	onRemove1(event) {
+		console.log(event);
+		this.files1.splice(this.files1.indexOf(event), 1);
+	}
+
+
+	uploadDocumentFile(){
+		if(this.files1.length>0){
+			this.uploadService.verificationDocFile(this.files1[0]).subscribe(res=>{
+			
+					this.verification.controls['uploadDocument'].setValue(res);
+					console.log(res);
+				
+			},err=>{
+		
+			})
+		}
+		}
+		// City Names
+		City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan']
+	// Choose city using select dropdown
+	changeCity(e) {
+		console.log(e.value)
+		this.college.setValue(e.target.value, {
+		onlySelf: true
+		})
+	}
+
+	// Getter method to access formcontrols
+	get college() {
+		return this.createJobSeekerCard.get('college');
+	}
 
 
 }

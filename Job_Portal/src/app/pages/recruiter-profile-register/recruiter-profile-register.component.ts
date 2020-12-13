@@ -339,6 +339,10 @@ export class RecruiterProfileRegisterComponent implements OnInit {
 		_recruiter.degree=controls.degree.value;
 		_recruiter.companyName=controls.companyName.value;
 		_recruiter.college=controls.college.value;
+		var username = localStorage.getItem('macrax-emailId')
+		_recruiter.userName = username
+		_recruiter.jobRole = controls.jobRole.value
+		_recruiter.jobLocation = controls.jobLocation.value
 
 		var funcationArea:string[]=[]
 		var skill:string[]=[];
