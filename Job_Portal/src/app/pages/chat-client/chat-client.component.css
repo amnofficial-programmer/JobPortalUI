@@ -327,6 +327,19 @@ img{
     margin-top: 5px;
 }
 
+.ng-chat-window .ng-chat-messages .ng-chat-message .status-sent{
+    display: block;
+    text-align: right;
+    font-size: .8em;
+}
+
+.ng-chat-window .ng-chat-messages .ng-chat-message .status-delivered{
+    display: block;
+    text-align: right;
+    font-size: .8em;
+    color: blue;
+}
+
 
 .ng-chat-window .ng-chat-footer>input {
     font-size: .8em;

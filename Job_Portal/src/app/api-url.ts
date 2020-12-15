@@ -4,7 +4,7 @@ export class Constants {
 
         HOST_URL: 'http://macraxuserapiapp-env.eba-e7h2xmg2.ap-south-1.elasticbeanstalk.com/macrax/',
         // HOST_URL:'http://localhost:8090/macrax/',
-
+        CHAT_SERVER_URL : 'http://172.31.9.19:3000',
         User_Singup: 'auth/signup',
         Login:'auth/authenticate',
         Job_Seeker_Add:'user/add/jobSeeker',
@@ -22,7 +22,8 @@ export class Constants {
         Upload_Verification_Doc:'uplaod/verification/doc',
         Upload_Jd_Video:'uplaod/jd/video',
         GetRecruiters: 'auth/users?role=',
-        GetJobSeekers: 'auth/users?role='
+        GetJobSeekers: 'auth/users?role=',
+        GetAllHostoricalChats: 'chatserver/getHistoricalChats'
 
 
 }

@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { Observer } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Message } from '../models/message.model';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { ResponseModel } from '../models/reponse.model';
+import { Constants } from '../api-url';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +14,13 @@ import { Message } from '../models/message.model';
 export class ChatService {
   socket = io(environment.SOCKET_ENDPOINT, null);
   observer: Observer<string>;
+  statusObserver: Observer<string>;
+  token:any;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     try {
       //this.socket = io(environment.SOCKET_ENDPOINT, null);
+      this.token=localStorage.getItem('macrax-token')
      }
      catch (error) {
       console.error('Error occured while creating a connection with chat server', error);
@@ -22,13 +28,21 @@ export class ChatService {
 
    }
 
+   getHTTPHeaders(): HttpHeaders {
+		let result = new HttpHeaders();
+		result = result.set('Content-Type', 'application/json');
+		result = result.set('Authorization', 'Bearer ' +this.token);
+
+		return result;
+	}
+
    ngOnInit(){
 
    }
-  setupChatRoom(from:string,to:string) {
+  setupChatRoom(from_id:string,to_id:string) {
       let msg = {
-        from :from,
-        to : to
+        from_id :from_id,
+        to_id : to_id
       }
       if(undefined != this.socket){
         this.socket.emit('joinChatRoom', msg);
@@ -59,6 +73,22 @@ export class ChatService {
     });
   }
 
+  getStatusObserver(): Observable<any>{
+    if(undefined != this.socket){
+      this.socket.on('statusUpdated', (message) =>{
+        this.statusObserver.next(message);
+      });
+    
+    }
+    return this.createStatusObservable();
+  }
+
+  createStatusObservable() : Observable<string> {
+    return new Observable(statusObserver => {
+      this.statusObserver = statusObserver;
+    });
+  }
+
   disconnect(){
     this.socket.emit('disconnect');
   }
@@ -70,6 +100,13 @@ export class ChatService {
     }else{
       console.log('Chat server is not running, Please contact administrator');
     }
+  }
+
+  getHistoricalChats(body){
+
+    const httpHeaders = this.getHTTPHeaders();
+	  return this.http.post<ResponseModel>(environment.SOCKET_ENDPOINT+Constants.URL.GetAllHostoricalChats,body);
+
   }
   
 }

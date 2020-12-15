@@ -27,7 +27,7 @@ export class JobSeekerService {
 		result = result.set('Authorization', 'Bearer ' +this.token);
 
 		return result;
-	  }
+	}
 
 	createJobSeekerProfile(jobSeeker:JobSeekerModel):Observable<ResponseModel>{
 		const httpHeaders = this.getHTTPHeaders();

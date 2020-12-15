@@ -46,7 +46,7 @@
       <div #ngChatWindowContainer  class="ng-chat-window-container">
         <div class="ng-chat-messages primary-background">
           <div *ngFor="let message of user.messages">
-            <div class="ng-chat-message ng-chat-message-received" *ngIf="!isCurrentUser(message['from']); else other_content">
+            <div class="ng-chat-message ng-chat-message-received" *ngIf="!isCurrentUser(message['from_id']); else other_content">
               <img alt="" class="avatar" height="30" width="30" src="https://pbs.twimg.com/profile_images/378800000449071678/27f2e27edd119a7133110f8635f2c130.jpeg">
               <div class="received-chat-message-container">
                 <span>{{ message.text }}</span>
@@ -58,6 +58,7 @@
                   <div class="sent-chat-message-container">
                     <span>{{ message.text }}</span>
                     <span class="message-sent-date">{{ message.time }}</span>
+                    <span [className]="getStatusClass(message)"><i class="fa fa-check" aria-hidden="true"></i></span>
                   </div>
                 </div>
               </ng-template>
@@ -74,7 +75,7 @@
   
         <div  class="ng-chat-footer primary-outline-color primary-background">
   
-          <input type="text" #inputMessage (keyup)="$event.keyCode == 13 ? sendMessage($event, user) : null" class="chat-window-input ng-pristine ng-valid ng-touched" placeholder="Type a message">
+          <input type="text" #inputMessage (keyup)="$event.keyCode == 13 ? sendMessage($event, user, inputMessage) : null" class="chat-window-input ng-pristine ng-valid ng-touched" placeholder="Type a message">
         </div>
       </div>
     </div>

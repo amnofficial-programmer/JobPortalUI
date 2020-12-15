@@ -1,12 +1,14 @@
 import { Component, OnInit,ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { UserModel } from '../../models/user.model';
 import { Message } from '../../models/message.model';
+import { ChatMessage } from '../../models/chat-message.model';
 import { formatDate } from '@angular/common';
 import { ChatService } from '../../services/chat.service';
 import { WindowService } from '../../services/window.service';
 import { RecruiterService } from 'src/app/services/recruiter.service';
 import { JobSeekerService } from 'src/app/services/job-seeker.service';
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-chat-client',
@@ -32,7 +34,7 @@ export class ChatClientComponent implements OnInit {
   @ViewChild('ngChatWindowContainer',{static:false}) ngChatWindowContainer:ElementRef;
   @ViewChildren('ngChatWindow') ngChatWindow:QueryList<ElementRef>;
 
-  constructor(private chatServie : ChatService, 
+  constructor(private chatService : ChatService, 
               private windowService: WindowService, 
               private recruiterService:RecruiterService, 
               private jobSeekerService: JobSeekerService,
@@ -55,18 +57,20 @@ export class ChatClientComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.chatServie.getMessages().subscribe(message =>{
+    this.chatService.getMessages().subscribe(message =>{
       this.messages.push(message);
       this.users.forEach((u) => {
           if(u.messages === undefined){
             u.messages = [];
           }
-          if(message['from'] === u.id.toString()){
-            u.messages.push(message);
+          if(message['from_id'] === u.id.toString()){
+              u.messages.push(message);   
           }
-          if(message['to'] === u.id.toString()){
+          if(message['to_id'] === u.id.toString()){
             u.messages.push(message);
+            this.chatService.emitMessage('statusUpdate', this.getMessageDeliveredPayLoad(message['message_id'], message['from_id'], message['to_id']));
           }
+          
       })
       console.log(message);
 
@@ -78,7 +82,40 @@ export class ChatClientComponent implements OnInit {
     }else{
       this.getAllJobSeekers();
     }
+
+    this.chatService.getStatusObserver().subscribe(message =>{
+      //we have to find here user to whom current user has sent the message
+      //cause we have mapped chat windows to user to whom we are sending message
+      var index = this.users.findIndex(x => x.id.toString() == message['to_id']);
+      if(index != -1){
+        if( this.users[index].messages == undefined){
+          this.users[index].messages = []
+        }
+        this.users[index].messages.forEach(msg => {
+          if(msg['message_id'].toString() === message['message_id']){
+            msg['status'] = message['status']
+          }
+        });
+      }
+    })
     
+  }
+
+  getStatusClass(message:Message){
+    if(message['status'] === 'DELIVERED'){
+      return 'status-delivered';
+    }else if(message['status'] === 'SENT'){
+      return 'status-sent';
+    }
+  }
+
+  getMessageDeliveredPayLoad(message_id, from_id, to_id){
+    let mess = new Message()
+    mess['message_id'] = message_id
+    mess['from_id'] = from_id
+    mess['to_id'] = to_id
+    mess['status'] = 'DELIVERED'
+     return mess
   }
 
   getAllJobSeekers(){
@@ -120,8 +157,8 @@ export class ChatClientComponent implements OnInit {
       });
   }
 
-  isCurrentUser(from){
-    if(this.userId === from){
+  isCurrentUser(from_id){
+    if(this.userId.toString() === from_id.toString()){
       return true;
     }
     return false;
@@ -182,30 +219,53 @@ export class ChatClientComponent implements OnInit {
       }
       user.setRightPosition(position);    
       this.ngChatWindows.push(user);
+      this.getHistoricalChats(user);
       this.createRoomWithUser(user);
     }
   }
 
-  createRoomWithUser(user){
+  getHistoricalChats(user:UserModel){
+    let body={
+      'from_id': this.userId,
+      'to_id'  : user.id.toString()
+    }
+    this.chatService.getHistoricalChats(body).subscribe(res => {
+      if(res.status==200){
+        user.messages = [];
+        res.data.forEach(element => {
+          let message = new Message();
+          message.deserialize(element);
+          user.messages.push(message);
+        });
+        
+      }else{
+        alert(res.msg)
+      }
+      
+      },err=>{
+        
+      });
+
+  }
+
+  createRoomWithUser(user:UserModel){
     this.joinRoom(this.userId,user.id.toString())
   }
 
-  joinRoom(from: string,to: string){
-    this.chatServie.setupChatRoom(from,to);
+  joinRoom(from_id: string,to_id: string){
+    this.chatService.setupChatRoom(from_id,to_id);
   }
 
-  sendMessage(event, user){
+  sendMessage(event, user, inputMessage:ElementRef){
     this.message = new Message();
-
-    let from = localStorage.getItem('macrax-emailId')
-    this.message['from'] = this.userId.toString();
-    this.message['to'] = user.id.toString();
+    this.message['message_id'] = uuidv4();
+    this.message['from_id'] = this.userId.toString();
+    this.message['to_id'] = user.id.toString();
     this.message['text'] = event.target.value;
     this.message['time'] = formatDate(new Date(), 'dd/MM/yy hh:mm a', 'en-US', '+0530');
-
-    //this.messages.push(this.message);
-    this.chatServie.sendMessage(this.message);
-    
+    this.message['status'] = 'SENT';
+    this.chatService.sendMessage(this.message);
+    event.target.value = '';
   }
 
   checkChatWindowCanBePlcaed(){
