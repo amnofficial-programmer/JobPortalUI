@@ -308,13 +308,25 @@ export class ProfileRegisterComponent implements OnInit {
 			skill.push(element['skill']);
 		});
 
-		_jobSeeker.functionalArea=funcationArea;
-		_jobSeeker.vedioUrl = 'https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
-		_jobSeeker.docUrl ='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
-		_jobSeeker.verificationCardId='2'
-		_jobSeeker.verificationCardUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
-		_jobSeeker.profileUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
+			
+		if(undefined != this.videoResume.controls['uploadVideo'].value && ''!=this.videoResume.controls['uploadVideo'].value){
+			let videoResponse = JSON.parse(this.videoResume.controls['uploadVideo'].value)
+			_jobSeeker.vedioUrl = videoResponse.data
+		}
 
+		if(undefined != this.uploadResume.controls['uploadResume'].value && '' != this.uploadResume.controls['uploadResume'].value){
+			let uploadResume = JSON.parse(this.uploadResume.controls['uploadResume'].value)
+			_jobSeeker.docUrl = uploadResume.data
+		}
+		
+		if(undefined != this.verification.controls['uploadDocument'].value && '' != this.verification.controls['uploadDocument'].value){
+			let verification = JSON.parse(this.verification.controls['uploadDocument'].value)
+			_jobSeeker.verificationCardUrl = verification.data
+		}
+		
+		_jobSeeker.functionalArea=funcationArea;
+		_jobSeeker.verificationCardId='2'
+		_jobSeeker.profileUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
 		_jobSeeker.skills=skill;
 		return _jobSeeker
 	}

@@ -363,12 +363,25 @@ export class RecruiterProfileRegisterComponent implements OnInit {
 			skill.push(element['skill']);
 		});
 
+		
+		if(undefined != this.videoResume.controls['uploadVideo'].value && ''!=this.videoResume.controls['uploadVideo'].value){
+			let videoResponse = JSON.parse(this.videoResume.controls['uploadVideo'].value)
+			_recruiter.vedioUrl = videoResponse.data
+		}
+
+		if(undefined != this.uploadResume.controls['uploadResume'].value && '' != this.uploadResume.controls['uploadResume'].value){
+			let uploadResume = JSON.parse(this.uploadResume.controls['uploadResume'].value)
+			_recruiter.docUrl = uploadResume.data
+		}
+		
+		if(undefined != this.verification.controls['uploadDocument'].value && '' != this.verification.controls['uploadDocument'].value){
+			let verification = JSON.parse(this.verification.controls['uploadDocument'].value)
+			_recruiter.verificationCardUrl = verification.data
+		}
+
 		_recruiter.functionalArea=functionalAresofRec;
 		_recruiter.jobSkills=skill;
-		_recruiter.vedioUrl = 'https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
-		_recruiter.docUrl ='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
 		_recruiter.verificationCardId='2'
-		_recruiter.verificationCardUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
 		_recruiter.profileUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
 		return _recruiter
 	}

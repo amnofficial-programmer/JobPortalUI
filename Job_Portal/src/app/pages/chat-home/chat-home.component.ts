@@ -10,6 +10,8 @@ export class ChatHomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
+  
 
 }
