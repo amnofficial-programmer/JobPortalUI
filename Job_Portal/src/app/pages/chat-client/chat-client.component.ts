@@ -53,6 +53,9 @@ export class ChatClientComponent implements OnInit {
 
   setUserId(){
     let id = this.sessionStore.retrieve('macrax-userId'); 
+    if(null == id){
+      return '';
+    }
     return id.toString();
   }
 
