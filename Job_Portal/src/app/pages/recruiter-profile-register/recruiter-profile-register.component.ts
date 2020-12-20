@@ -10,6 +10,7 @@ import { ExperienceModel } from 'src/app/models/experience.model';
 import { SalaryInfoModel } from 'src/app/models/salary-info.model';
 import { JobSeekerService } from 'src/app/services/job-seeker.service';
 import { RecruiterService } from 'src/app/services/recruiter.service';
+import { SessionStorageService } from 'ngx-webstorage';
 //capture video
 import videojs from 'video.js';
 import * as adapter from 'webrtc-adapter/out/adapter_no_global.js';
@@ -68,7 +69,13 @@ export class RecruiterProfileRegisterComponent implements OnInit {
 	MultSelectSkill : any= {};
 	ids :any =[];
 	joblocationList:any[]=[];
-	constructor(private _formBuilder: FormBuilder,private router:Router ,private jobSeekerService:JobSeekerService,private recruiterService:RecruiterService, elementRef: ElementRef,private uploadService:FileUploadService) { 
+	constructor(private _formBuilder: FormBuilder,
+				private router:Router ,
+				private jobSeekerService:JobSeekerService,
+				private recruiterService:RecruiterService,
+				elementRef: ElementRef,
+				private uploadService:FileUploadService,
+				private sessionStore: SessionStorageService) { 
 
 		this.player = false;
 
@@ -339,7 +346,8 @@ export class RecruiterProfileRegisterComponent implements OnInit {
 		_recruiter.degree=controls.degree.value;
 		_recruiter.companyName=controls.companyName.value;
 		_recruiter.college=controls.college.value;
-		var username = localStorage.getItem('macrax-emailId')
+		//var username = localStorage.getItem('macrax-emailId')
+		var username = this.sessionStore.retrieve('macrax-emailId')
 		_recruiter.userName = username
 		_recruiter.jobRole = controls.jobRole.value
 		_recruiter.jobLocation = controls.jobLocation.value

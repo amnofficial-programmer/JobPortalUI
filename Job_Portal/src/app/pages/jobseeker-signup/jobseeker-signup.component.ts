@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Constants } from 'src/app/api-url';
 import { SmsService } from 'src/app/services/sms.service';
 import { LoginService } from 'src/app/services/login.service';
+import { SessionStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-jobseeker-signup',
@@ -16,7 +17,12 @@ export class JobseekerSignupComponent implements OnInit {
 
   jobSeekerRegisterForm: FormGroup;
 	hasFormErrors = false;
-  constructor(private _formBuilder: FormBuilder,private jobSeekerService:JobSeekerService,private router:Router,private smsService:SmsService,private loginService:LoginService) { }
+  constructor(private _formBuilder: FormBuilder,
+    private jobSeekerService:JobSeekerService,
+    private router:Router,
+    private smsService:SmsService,
+    private loginService:LoginService,
+    private sessionStore: SessionStorageService) { }
 
   ngOnInit() {
    
@@ -83,7 +89,8 @@ createUser(_user: UserModel) {
       return;
     }else{
       alert(res.msg);
-      localStorage.setItem('macrax-emailId',res.data);
+      //localStorage.setItem('macrax-emailId',res.data);
+      this.sessionStore.store('macrax-emailId',res.data);
       this.router.navigateByUrl('/jobseeker-login');
       // this.router.navigateByUrl('/dashboard/job-seeker-profilereg')
     }

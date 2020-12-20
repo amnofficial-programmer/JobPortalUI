@@ -10,7 +10,7 @@ import { SkillInfoModel } from 'src/app/models/skill-info.model';
 import { SalaryInfoModel } from 'src/app/models/salary-info.model';
 import { JobSeekerModel } from 'src/app/models/job-seeker.model';
 import { IMultiSelectSettings } from 'ng2-multiselect';
-
+import { SessionStorageService } from 'ngx-webstorage';
 
 import videojs from 'video.js';
 import * as adapter from 'webrtc-adapter/out/adapter_no_global.js';
@@ -46,7 +46,12 @@ export class ProfileRegisterComponent implements OnInit {
 	selectedAreas :any =[];
 	MultSelectSkill : any= {};
 	ids :any =[];
-	constructor(private _formBuilder: FormBuilder,private router:Router,private jobSeekerService:JobSeekerService,elementRef: ElementRef,private uploadService:FileUploadService) { 
+	constructor(private _formBuilder: FormBuilder,
+				private router:Router,
+				private jobSeekerService:JobSeekerService,
+				elementRef: ElementRef,
+				private uploadService:FileUploadService,
+				private sessionStore: SessionStorageService) { 
 
 		this.player = false;
 		// save reference to plugin (so it initializes)
@@ -285,7 +290,8 @@ export class ProfileRegisterComponent implements OnInit {
 		_jobSeeker.degree=controls.degree.value;
 		_jobSeeker.companyName=controls.companyName.value;
 		_jobSeeker.college=controls.college.value;
-		var username = localStorage.getItem('macrax-emailId')
+		//var username = localStorage.getItem('macrax-emailId')
+		var username = this.sessionStore.retrieve('macrax-emailId')
 		_jobSeeker.userName = username
 
 	

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 // RxJS
 import { Observable } from 'rxjs';
+import {SessionStorageService} from 'ngx-webstorage';
 
 // Models
 
@@ -17,9 +18,11 @@ import { ResponseModel } from '../models/reponse.model';
 export class FileUploadService {
     token:any;
     emailId:any;
-    constructor(private http: HttpClient) {
-        this.token=localStorage.getItem('macrax-token')
-        this.emailId=localStorage.getItem('macrax-emailId')
+    constructor(private http: HttpClient, private sessionStore: SessionStorageService) {
+        //this.token=localStorage.getItem('macrax-token')
+        this.token = this.sessionStore.retrieve('macrax-token')
+       // this.emailId=localStorage.getItem('macrax-emailId')
+        this.emailId=this.sessionStore.retrieve('macrax-emailId')
      }
      getHTTPHeaders(): HttpHeaders {
 		let result = new HttpHeaders();

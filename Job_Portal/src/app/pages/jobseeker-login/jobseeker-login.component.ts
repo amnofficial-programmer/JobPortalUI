@@ -49,8 +49,8 @@ export class JobseekerLoginComponent implements OnInit {
         }else{
           alert("Login sucessfully");
         const responseObj=res['data'];
-        localStorage.setItem('macrax-token',responseObj.token);
-        localStorage.setItem('macrax-emailId',responseObj.userName);
+        //localStorage.setItem('macrax-token',responseObj.token);
+        //localStorage.setItem('macrax-emailId',responseObj.userName);
         localStorage.setItem('role','0');
         this.sessionStore.store('macrax-token',responseObj.token);
         this.sessionStore.store('macrax-emailId',responseObj.userName);

@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 
 import { Constants } from '../api-url';
 import { UserModel } from '../models/user.model';
+import {SessionStorageService} from 'ngx-webstorage';
 
 import { ResponseModel } from '../models/reponse.model';
 import { JobSeekerModel } from '../models/job-seeker.model';
@@ -17,8 +18,8 @@ import { JobSeekerModel } from '../models/job-seeker.model';
 @Injectable()
 export class JobSeekerService {
 	token:any;
-	constructor(private http: HttpClient) { 
-      this.token=localStorage.getItem('macrax-token')
+	constructor(private http: HttpClient, private sessionStore: SessionStorageService) { 
+	  this.token = sessionStore.retrieve('macrax-token');
 	}
 
 	getHTTPHeaders(): HttpHeaders {

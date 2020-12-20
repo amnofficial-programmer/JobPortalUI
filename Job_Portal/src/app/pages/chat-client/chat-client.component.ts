@@ -46,7 +46,8 @@ export class ChatClientComponent implements OnInit {
     this.userMessage='';
     this.flag=false;
     this.recruiter = [];
-    this.userName = localStorage.getItem('macrax-emailId');
+    //this.userName = localStorage.getItem('macrax-emailId');
+    this.userName = sessionStore.retrieve('macrax-emailId');
     this.userId = this.setUserId();
   }
 

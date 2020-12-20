@@ -11,6 +11,7 @@ import { UserModel } from '../models/user.model';
 import { ResponseModel } from '../models/reponse.model';
 import { JobSeekerModel } from '../models/job-seeker.model';
 import { RecruiterModel } from '../models/recruiter.model';
+import {SessionStorageService} from 'ngx-webstorage';
 
 
 
@@ -19,8 +20,10 @@ export class RecruiterService {
 
     token:any;
 
-    constructor(private http: HttpClient) { 
-        this.token=localStorage.getItem('macrax-token')
+    constructor(private http: HttpClient, private sessionStore: SessionStorageService) { 
+        //this.token=localStorage.getItem('macrax-token')
+        this.token = sessionStore.retrieve('macrax-token')
+
     }
     
 //     createRecruiterUser(user: UserModel): Observable<ResponseModel> {

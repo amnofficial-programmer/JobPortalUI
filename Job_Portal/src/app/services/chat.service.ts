@@ -7,6 +7,7 @@ import { Message } from '../models/message.model';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ResponseModel } from '../models/reponse.model';
 import { Constants } from '../api-url';
+import {SessionStorageService} from 'ngx-webstorage';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,11 @@ export class ChatService {
   statusObserver: Observer<string>;
   token:any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private sessionStore: SessionStorageService) {
     try {
       //this.socket = io(environment.SOCKET_ENDPOINT, null);
-      this.token=localStorage.getItem('macrax-token')
+      //this.token=localStorage.getItem('macrax-token')
+      this.token = sessionStore.retrieve('macrax-token')
      }
      catch (error) {
       console.error('Error occured while creating a connection with chat server', error);

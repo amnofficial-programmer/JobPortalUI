@@ -46,8 +46,8 @@ export class RecruiterLoginComponent implements OnInit {
         }else{
           alert("Login sucessfully");
       const responseObj=res['data'];
-      localStorage.setItem('macrax-token',responseObj.token);
-      localStorage.setItem('macrax-emailId',responseObj.userName);
+     // localStorage.setItem('macrax-token',responseObj.token);
+     // localStorage.setItem('macrax-emailId',responseObj.userName);
       //localStorage.setItem('macrax-password',this.loginFormRecruiter.value.password);
       localStorage.setItem('macrax-userId',responseObj.uid);
       localStorage.setItem('role','1');
