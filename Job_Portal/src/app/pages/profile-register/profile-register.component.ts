@@ -312,6 +312,8 @@ export class ProfileRegisterComponent implements OnInit {
 		if(undefined != this.videoResume.controls['uploadVideo'].value && ''!=this.videoResume.controls['uploadVideo'].value){
 			let videoResponse = JSON.parse(this.videoResume.controls['uploadVideo'].value)
 			_jobSeeker.vedioUrl = videoResponse.data
+		}else{
+			_jobSeeker.vedioUrl = '';
 		}
 
 		if(undefined != this.uploadResume.controls['uploadResume'].value && '' != this.uploadResume.controls['uploadResume'].value){
