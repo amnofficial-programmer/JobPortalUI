@@ -1,7 +1,0 @@
-.job-bx-title .btn-group.bootstrap-select{
-    margin: 2px;
-}
-
-.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){
-    margin: 2px;
-}

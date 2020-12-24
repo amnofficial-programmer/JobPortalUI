@@ -8,13 +8,20 @@
 <!-- main nav -->
 <div class="header-nav navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
     <ul class="nav navbar-nav ml-auto">
-        <li class="">
-            <a href="/jobseeker-signup" class="site-button" style="color:white"><i class="fa fa-user"></i> Job
-                Seeker</a>
-        </li>
-        <li class="">
-            <a href="/recruiter-signup" class="site-button" style="color:white"><i class="fa fa-lock"></i> Recruiter
+       
+        <li class="logout-button" *ngIf="isLoggedIn(); else buttonstBlock">
+            <a href="" class="site-button" style="color:white" (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout
             </a>
         </li>
+        <ng-template #buttonstBlock>
+            <li class="" >
+                <a href="/jobseeker-login" class="site-button" style="color:white"><i class="fa fa-user"></i> Job
+                    Seeker</a>
+            </li>
+            <li class="" >
+                <a href="/recruiter-login" class="site-button" style="color:white"><i class="fa fa-lock"></i> Recruiter
+                </a>
+            </li>
+        </ng-template>    
     </ul>
 </div>

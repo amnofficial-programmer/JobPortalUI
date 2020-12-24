@@ -18,7 +18,7 @@
                                 <input name="emailId" required="" class="form-control" placeholder="Your Email Address"
                                     type="email" formControlName="userName">
                                     <mat-error>
-                                        <span *ngIf="!jobSeekerRegisterForm.get('userName').valid && jobSeekerRegisterForm.get('userName').touched">Email Address  is required</span>
+                                        <span *ngIf="!jobSeekerRegisterForm.get('userName').valid && jobSeekerRegisterForm.get('userName').touched">Please Enter a correct Email address</span>
                                       </mat-error>
                                     <!-- <div *ngIf="!jobSeekerRegisterForm.controls.userName.valid && jobSeekerRegisterForm.controls.userName.touched" class="invalid-feedback">
                                         <div *ngIf="jobSeekerRegisterForm.controls.userName.errors.required">Email Id  is required</div>
@@ -51,8 +51,9 @@
                                 <input name="confirmPassword" required="" class="form-control "
                                     placeholder="Confirm Password" type="password" formControlName="confirmPassword">
                                     <mat-error>
-                                        <span *ngIf="!jobSeekerRegisterForm.get('confirmPassword').valid && jobSeekerRegisterForm.get('confirmPassword').touched">Confirm Password is required</span>
-                                      </mat-error>
+                                        <!-- <span *ngIf="!jobSeekerRegisterForm.get('confirmPassword').valid && jobSeekerRegisterForm.get('confirmPassword').touched">Confirm Password is required</span> -->
+                                        &nbsp; <span *ngIf="!checkConfirmPassAndPassAreEqual()">Confirm Password and Password are not matching</span>
+                                    </mat-error>
                             </div>
                             <div class="form-group">
                                 <label for="">

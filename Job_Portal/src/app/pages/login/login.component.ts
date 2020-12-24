@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginFormRecruiter = this._formBuilder.group({
-      userName: ['', Validators.required],
+      userName: ['',  Validators.compose([	Validators.required,	Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])],
       password: ['', Validators.required],
       termsAndCondtions: ['', Validators.required]
     });
@@ -26,6 +26,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  get f() {
+     if(this.loginFormRecruiter){
+      return this.loginFormRecruiter.controls; 
+     }else if(this.loginFormJobSeeker){
+      return this.loginFormJobSeeker.controls; 
+     }else{
+       return null;
+     }
+     
+    }
 
 
 

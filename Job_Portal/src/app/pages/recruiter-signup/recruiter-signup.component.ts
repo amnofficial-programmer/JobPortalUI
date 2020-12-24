@@ -33,7 +33,7 @@ export class RecruiterSignupComponent implements OnInit {
 
   createFormRecruiter(){
     this.recruiterRegister = this._formBuilder.group({
-      userName: ['', Validators.compose([	Validators.required,	Validators.email])],
+      userName: ['', Validators.compose([	Validators.required,	Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])],
       mobileNo: ['', ''],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],

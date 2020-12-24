@@ -25,7 +25,7 @@ export class RecruiterForgetPasswordComponent implements OnInit {
   createForm() {
 
     this.EmailConfirmationForm = this._formBuilder.group({
-      emailId: ['', Validators.required],
+      emailId: ['',  Validators.compose([	Validators.required,	Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])],
    
     })
 

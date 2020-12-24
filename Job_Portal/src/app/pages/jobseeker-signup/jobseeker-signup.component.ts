@@ -29,10 +29,24 @@ export class JobseekerSignupComponent implements OnInit {
     this.createFormJobSeeker();
   }
 
+  checkConfirmPassAndPassAreEqual(){
+    if(!this.jobSeekerRegisterForm.get('confirmPassword').valid && this.jobSeekerRegisterForm.get('confirmPassword').touched){
+      return false;
+    }else if(this.jobSeekerRegisterForm.get('confirmPassword').touched){
+      if(this.jobSeekerRegisterForm.get('confirmPassword').value != this.jobSeekerRegisterForm.get('password').value){
+        return false;
+      }else{
+        return true;
+      }
+    }else{
+      return true;
+    }
+  }
+
 
   createFormJobSeeker(){
     this.jobSeekerRegisterForm = this._formBuilder.group({
-      userName: ['', Validators.compose([	Validators.required,	Validators.email])],
+      userName: ['', Validators.compose([	Validators.required,	Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])],
       mobileNo: ['', ],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],

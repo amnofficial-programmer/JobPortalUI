@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionStorageService } from 'ngx-webstorage';
+import { GeneralUtilityService } from '../../../services/general-utility.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sessionStore: SessionStorageService, private generalUtilityService : GeneralUtilityService) { }
 
   ngOnInit(): void {
+  }
+
+  isLoggedIn(){
+      // const  token = this.sessionStore.retrieve('macrax-token');
+      // if(undefined != token || null != token){
+      //   return true;
+      // }else{
+      //   return false;
+      // }
+
+      return this.generalUtilityService.LoggedIn();
+  }
+
+  logout(){
+    this.sessionStore.clear();
   }
 
 }

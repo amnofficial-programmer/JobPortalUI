@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeneralUtilityService } from '../../services/general-utility.service';
 
 @Component({
   selector: 'app-home',
@@ -7,18 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private generalUtilityService : GeneralUtilityService) { }
 
   ngOnInit(): void {
   }
 
 
-  isLoggedInUser(){
-    //localStorage.setItem('macrax-emailId',responseObj.userName);
-    //localStorage.setItem('macrax-password',this.loginFormJobSeeker.value.password);
-    //const userName = localStorage.getItem('macrax-emailId');
-    //const password = localStorage.getItem('macrax-password');
-
+  isLoggedIn(){
+    return this.generalUtilityService.LoggedIn();
   }
+
+  
 
 }

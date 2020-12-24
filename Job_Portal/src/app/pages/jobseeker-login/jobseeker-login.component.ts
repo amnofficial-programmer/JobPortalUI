@@ -20,7 +20,7 @@ export class JobseekerLoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginFormJobSeeker = this._formBuilder.group({
-      userName: ['', Validators.compose([	Validators.required,	Validators.email])],
+      userName: ['', Validators.compose([	Validators.required,	Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])],
       password: ['', Validators.required]
     });
   }

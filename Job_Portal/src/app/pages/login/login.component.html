@@ -21,6 +21,8 @@
                             <label class="font-weight-700">E-MAIL *</label>
                             <input name="email" required="" formControlName="userName" class="form-control"
                                 placeholder="Your Email Address" type="email">
+                                <span *ngIf="f!=null && f.userName.errors">Email Address is not valid</span>
+                            
                         </div>
                         <div class="form-group">
                             <label class="font-weight-700">PASSWORD *</label>

@@ -369,6 +369,8 @@
                             </label>
                         </div>
                     </li>
+
+                    
                 </ul>
                 <div class="m-t30">
                     <div class="d-flex">
@@ -581,4 +583,6 @@
     </div>
 </div>
 <!-- Our Latest Blog -->
+<div *ngIf = "isLoggedIn()">
 <app-chat-client></app-chat-client>
+</div>
