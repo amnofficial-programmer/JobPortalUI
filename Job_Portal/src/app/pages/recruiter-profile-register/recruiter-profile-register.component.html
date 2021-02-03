@@ -218,27 +218,12 @@
             <mat-step [stepControl]="uploadResume" label="Upload Resume">
                 <div class="job-bx job-profile">
                     <div class="job-bx-title clearfix">
-                        <h5 class="font-weight-700 text-uppercase">Upload your updated Resume. Macrax support PDF, DOC,
-                            and DOCX formats only</h5>
+                        <h5 class="font-weight-700 text-uppercase">Upload a detailed Job Description. Macrax supports PDF, DOC, and DOCX formats only</h5>
                     </div>
 
                     <form class="attach-resume" [formGroup]="uploadResume">
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
-                                <!-- <div class="form-group">
-                                    <div class="custom-file">
-                                        <p class="m-auto align-self-center">
-                                            <i class="fa fa-upload fa-3x"></i>
-                                            <br>You can also drag & drop here
-                                        </p>
-                                        <input type="file" class="site-button form-control" id="customFile"
-                                            formControlName="uploadResume">
-                                            <mat-error>
-                                                <span *ngIf="!uploadResume.get('uploadResume').valid && uploadResume.get('uploadResume').touched">Resume is required</span>
-                                              </mat-error>
-                                    </div>
-                                </div> -->
-
                                 <ngx-dropzone (change)="onSelect($event)" [multiple]="false" [maxFileSize]="2000">
                                     <ngx-dropzone-label>You can also drag & drop here</ngx-dropzone-label>
                                     <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" >
@@ -261,8 +246,7 @@
             <mat-step [stepControl]="verification" label="Verification">
                 <div class="job-bx job-profile">
                     <div class="job-bx-title clearfix">
-                        <h5 class="font-weight-700 text-uppercase">Upload one of the following documents to verify your
-                            College, Department and Degree as mentioned</h5>
+                        <h5 class="font-weight-700 text-uppercase">Upload one of the following documents to verify your association with the company as mentioned</h5>
                     </div>
                     <form class="attach-resume" [formGroup]="verification">
                         <div class="row mb-3">
@@ -270,7 +254,7 @@
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input class="custom-control-input" type="radio" name="selectDocumentType"
                                         id="aluminiIDCard" value="aluminiIDCard" formControlName="selectDocumentType">
-                                    <label class="custom-control-label" for="aluminiIDCard">Alumini ID Card</label>
+                                    <label class="custom-control-label" for="aluminiIDCard">Offer Letter</label>
                                     <mat-error>
                                         <span *ngIf="!verification.get('selectDocumentType').valid && verification.get('selectDocumentType').touched">Document Type is required</span>
                                       </mat-error>
@@ -278,24 +262,23 @@
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input class="custom-control-input" type="radio" name="selectDocumentType"
                                         id="studentIDCard" value="studentIDCard" formControlName="selectDocumentType">
-                                    <label class="custom-control-label" for="studentIDCard">Student ID Card</label>
+                                    <label class="custom-control-label" for="studentIDCard">Appoinment Letter</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input class="custom-control-input" type="radio" name="selectDocumentType"
                                         id="transcript" value="transcript" formControlName="selectDocumentType">
-                                    <label class="custom-control-label" for="transcript">Transcript</label>
+                                    <label class="custom-control-label" for="transcript">Company ID Card</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input class="custom-control-input" type="radio" name="selectDocumentType"
                                         id="degreeCertificate" value="degreeCertificate"
                                         formControlName="selectDocumentType">
-                                    <label class="custom-control-label" for="degreeCertificate">Degree
-                                        Certificate</label>
+                                    <label class="custom-control-label" for="degreeCertificate">Recent Pay Slips</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input class="custom-control-input" type="radio" name="selectDocumentType"
                                         id="hostelCard" value="hostelCard" formControlName="selectDocumentType">
-                                    <label class="custom-control-label" for="hostelCard">Hostel Card</label>
+                                    <label class="custom-control-label" for="hostelCard">Form - 16</label>
                                 </div>
                             </div>
                         </div>

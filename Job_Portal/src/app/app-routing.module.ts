@@ -17,9 +17,18 @@ import { ChatHomeComponent } from './pages/chat-home/chat-home.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { RecruiterForgetPasswordComponent } from './pages/recruiter-forget-password/recruiter-forget-password.component';
 import { DemoComponentComponent } from './demo-component/demo-component.component'; 
+import { AdminComponent } from './admin/admin/admin.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'dashboard/home', pathMatch: 'full' },
+    { path: '', redirectTo: 'dashboard/chat-home', pathMatch: 'full' },
+    {
+        path: 'tHvwrDZTTg0HV3O/ABqRxwdH49tfl4sRzksJFxJ6idaoUG/admin',
+        component: AdminComponent,
+        children: [
+            {
+          path: '',
+          loadChildren: './admin/admin.module#AdminModule'
+    }]},
 
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },

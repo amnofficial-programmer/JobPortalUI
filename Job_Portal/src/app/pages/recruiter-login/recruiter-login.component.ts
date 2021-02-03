@@ -58,11 +58,9 @@ export class RecruiterLoginComponent implements OnInit {
       this.sessionStore.store('role','1');
         
       if(responseObj.IsOnboard==0){
-    this.router.navigateByUrl('/dashboard/recruiter-profilereg')
-
+        this.router.navigateByUrl('/dashboard/recruiter-profilereg')
       }else{
-
-     this.router.navigateByUrl('/dashboard/home')
+        this.router.navigateByUrl('/dashboard/home')
       }
     }
     }, err => {

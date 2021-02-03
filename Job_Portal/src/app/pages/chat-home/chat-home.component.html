@@ -1,9 +1,8 @@
-<app-banner></app-banner>
+<!-- <app-banner></app-banner> -->
 <!-- Filters Search -->
 <div class="section-full browse-job-find">
 	<div class="container">
-		<div class="find-job-bx">
-			
+		<div class="find-job-bx">	
 		</div>
 	</div>
 </div>
@@ -14,18 +13,17 @@
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-md-12">
 					<div class="job-bx-title clearfix">
-						<div class="">
-							<span class="select-title">Sort By</span>
-							
-								<select class="bs-select-hidden">
-									<option>Functional Area</option>
+						<div class="criteria">
+							<label for="sort">Sort by:</label>
+							<select class="bs-select-hidden">
+								  	<option>Functional Area</option>
 									<option>Web Designing</option>
 									<option>Java</option>
 									<option>PHP</option>
 									<option>Angular</option>
 									<option>React</option>
-								</select>
-							
+
+							  </select>
 							<select class="bs-select-hidden">
 								<option>Experience</option>
 								<option>Fresher</option>
@@ -57,7 +55,7 @@
 						</div>
 					</div>
 					<ul class="post-job-bx">
-						<li>
+						<li *ngFor= "let job of jobs">
 							<div class="post-bx">
 								<div class="d-flex m-b30">
 									<div class="job-post-company">
@@ -72,13 +70,13 @@
 									<div class="job-post-info">
 										<h4>
 											<a href=""
-												>Digital Marketing Executive</a
+												>{{ job.jobRole }}</a
 											>
 										</h4>
 										<ul>
 											<li>
 												<i class="fa fa-map-marker"></i>
-												Sacramento, California
+												{{ job.jobLocation }}
 											</li>
 											<li>
 												<i class="fa fa-bookmark-o"></i>
@@ -86,30 +84,32 @@
 											</li>
 											<li>
 												<i class="fa fa-clock-o"></i>
-												Published 11 months ago
+												Published 1 months ago
 											</li>
 										</ul>
 										<p class="my-2">
 											<i class="fa fa-graduation-cap"></i>
-											Software Engineering - IIT/NIT/BITS
-											- B.Tech/MBA - CSE/EE
+											{{ job.functionalArea }} - {{ job.college }}
+											- {{ job.degree }} - {{ job.department }}
 										</p>
 										<p class="my-2">
 											<i class="fa fa-lock"></i>
-											1 - 3 Years | Rs 10 - 20 LPA | Pune
+											{{ job.experience }} | {{ job.expected_salary }} | {{ job.jobLocation }}
 											India
 										</p>
 										<p class="my-2">
-											<i class="fa fa-tag"></i>
-											#Product Management # Hooked #
-											User-Centric # Mobile Internet
+											<i class="fa fa-tag"></i>&nbsp;
+											<span *ngFor = " let skill of job.jobSkills">{{skill}}</span>
+											<!-- #Product Management # Hooked #
+											User-Centric # Mobile Internet -->
 										</p>
 									</div>
 								</div>
 								<div class="d-flex">
 									<div class="job-time mr-auto">
 										<a
-											href="javascript:void(0);"
+											href="dashboard/chat-home"
+											(click)="goToLink(job.vedioUrl)"
 											class="mr-1"
 											><span>Job Description</span></a
 										>
@@ -120,367 +120,7 @@
 										>
 									</div>
 									<div class="salary-bx">
-										<span>$1200 - $ 2500</span>
-									</div>
-								</div>
-								<label class="like-btn">
-									<input type="checkbox" />
-									<span class="checkmark"></span>
-								</label>
-							</div>
-						</li>
-						<li>
-							<div class="post-bx">
-								<div class="d-flex m-b30">
-									<div class="job-post-company">
-										<a href="javascript:void(0);">
-											<span>
-												<img
-													alt=""
-													src="./assets/images/logo/icon1.png"
-												/> </span
-										></a>
-									</div>
-									<div class="job-post-info">
-										<h4>
-											<a href=""
-												>Digital Marketing Executive</a
-											>
-										</h4>
-										<ul>
-											<li>
-												<i class="fa fa-map-marker"></i>
-												Sacramento, California
-											</li>
-											<li>
-												<i class="fa fa-bookmark-o"></i>
-												Full Time
-											</li>
-											<li>
-												<i class="fa fa-clock-o"></i>
-												Published 11 months ago
-											</li>
-										</ul>
-										<p class="my-2">
-											<i class="fa fa-graduation-cap"></i>
-											Software Engineering - IIT/NIT/BITS
-											- B.Tech/MBA - CSE/EE
-										</p>
-										<p class="my-2">
-											<i class="fa fa-lock"></i>
-											1 - 3 Years | Rs 10 - 20 LPA | Pune
-											India
-										</p>
-										<p class="my-2">
-											<i class="fa fa-tag"></i>
-											#Product Management # Hooked #
-											User-Centric # Mobile Internet
-										</p>
-									</div>
-								</div>
-								<div class="d-flex">
-									<div class="job-time mr-auto">
-										<a
-											href="javascript:void(0);"
-											class="mr-1"
-											><span>Job Description</span></a
-										>
-										<a
-											href="javascript:void(0);"
-											class="ml-1"
-											><span>Send Message</span></a
-										>
-									</div>
-									<div class="salary-bx">
-										<span>$1200 - $ 2500</span>
-									</div>
-								</div>
-								<label class="like-btn">
-									<input type="checkbox" />
-									<span class="checkmark"></span>
-								</label>
-							</div>
-						</li>
-						<li>
-							<div class="post-bx">
-								<div class="d-flex m-b30">
-									<div class="job-post-company">
-										<a href="javascript:void(0);">
-											<span>
-												<img
-													alt=""
-													src="./assets/images/logo/icon1.png"
-												/> </span
-										></a>
-									</div>
-									<div class="job-post-info">
-										<h4>
-											<a href=""
-												>Digital Marketing Executive</a
-											>
-										</h4>
-										<ul>
-											<li>
-												<i class="fa fa-map-marker"></i>
-												Sacramento, California
-											</li>
-											<li>
-												<i class="fa fa-bookmark-o"></i>
-												Full Time
-											</li>
-											<li>
-												<i class="fa fa-clock-o"></i>
-												Published 11 months ago
-											</li>
-										</ul>
-										<p class="my-2">
-											<i class="fa fa-graduation-cap"></i>
-											Software Engineering - IIT/NIT/BITS
-											- B.Tech/MBA - CSE/EE
-										</p>
-										<p class="my-2">
-											<i class="fa fa-lock"></i>
-											1 - 3 Years | Rs 10 - 20 LPA | Pune
-											India
-										</p>
-										<p class="my-2">
-											<i class="fa fa-tag"></i>
-											#Product Management # Hooked #
-											User-Centric # Mobile Internet
-										</p>
-									</div>
-								</div>
-								<div class="d-flex">
-									<div class="job-time mr-auto">
-										<a
-											href="javascript:void(0);"
-											class="mr-1"
-											><span>Job Description</span></a
-										>
-										<a
-											href="javascript:void(0);"
-											class="ml-1"
-											><span>Send Message</span></a
-										>
-									</div>
-									<div class="salary-bx">
-										<span>$1200 - $ 2500</span>
-									</div>
-								</div>
-								<label class="like-btn">
-									<input type="checkbox" />
-									<span class="checkmark"></span>
-								</label>
-							</div>
-						</li>
-						<li>
-							<div class="post-bx">
-								<div class="d-flex m-b30">
-									<div class="job-post-company">
-										<a href="javascript:void(0);">
-											<span>
-												<img
-													alt=""
-													src="./assets/images/logo/icon1.png"
-												/> </span
-										></a>
-									</div>
-									<div class="job-post-info">
-										<h4>
-											<a href=""
-												>Digital Marketing Executive</a
-											>
-										</h4>
-										<ul>
-											<li>
-												<i class="fa fa-map-marker"></i>
-												Sacramento, California
-											</li>
-											<li>
-												<i class="fa fa-bookmark-o"></i>
-												Full Time
-											</li>
-											<li>
-												<i class="fa fa-clock-o"></i>
-												Published 11 months ago
-											</li>
-										</ul>
-										<p class="my-2">
-											<i class="fa fa-graduation-cap"></i>
-											Software Engineering - IIT/NIT/BITS
-											- B.Tech/MBA - CSE/EE
-										</p>
-										<p class="my-2">
-											<i class="fa fa-lock"></i>
-											1 - 3 Years | Rs 10 - 20 LPA | Pune
-											India
-										</p>
-										<p class="my-2">
-											<i class="fa fa-tag"></i>
-											#Product Management # Hooked #
-											User-Centric # Mobile Internet
-										</p>
-									</div>
-								</div>
-								<div class="d-flex">
-									<div class="job-time mr-auto">
-										<a
-											href="javascript:void(0);"
-											class="mr-1"
-											><span>Job Description</span></a
-										>
-										<a
-											href="javascript:void(0);"
-											class="ml-1"
-											><span>Send Message</span></a
-										>
-									</div>
-									<div class="salary-bx">
-										<span>$1200 - $ 2500</span>
-									</div>
-								</div>
-								<label class="like-btn">
-									<input type="checkbox" />
-									<span class="checkmark"></span>
-								</label>
-							</div>
-						</li>
-						<li>
-							<div class="post-bx">
-								<div class="d-flex m-b30">
-									<div class="job-post-company">
-										<a href="javascript:void(0);">
-											<span>
-												<img
-													alt=""
-													src="./assets/images/logo/icon1.png"
-												/> </span
-										></a>
-									</div>
-									<div class="job-post-info">
-										<h4>
-											<a href=""
-												>Digital Marketing Executive</a
-											>
-										</h4>
-										<ul>
-											<li>
-												<i class="fa fa-map-marker"></i>
-												Sacramento, California
-											</li>
-											<li>
-												<i class="fa fa-bookmark-o"></i>
-												Full Time
-											</li>
-											<li>
-												<i class="fa fa-clock-o"></i>
-												Published 11 months ago
-											</li>
-										</ul>
-										<p class="my-2">
-											<i class="fa fa-graduation-cap"></i>
-											Software Engineering - IIT/NIT/BITS
-											- B.Tech/MBA - CSE/EE
-										</p>
-										<p class="my-2">
-											<i class="fa fa-lock"></i>
-											1 - 3 Years | Rs 10 - 20 LPA | Pune
-											India
-										</p>
-										<p class="my-2">
-											<i class="fa fa-tag"></i>
-											#Product Management # Hooked #
-											User-Centric # Mobile Internet
-										</p>
-									</div>
-								</div>
-								<div class="d-flex">
-									<div class="job-time mr-auto">
-										<a
-											href="javascript:void(0);"
-											class="mr-1"
-											><span>Job Description</span></a
-										>
-										<a
-											href="javascript:void(0);"
-											class="ml-1"
-											><span>Send Message</span></a
-										>
-									</div>
-									<div class="salary-bx">
-										<span>$1200 - $ 2500</span>
-									</div>
-								</div>
-								<label class="like-btn">
-									<input type="checkbox" />
-									<span class="checkmark"></span>
-								</label>
-							</div>
-						</li>
-						<li>
-							<div class="post-bx">
-								<div class="d-flex m-b30">
-									<div class="job-post-company">
-										<a href="javascript:void(0);">
-											<span>
-												<img
-													alt=""
-													src="./assets/images/logo/icon1.png"
-												/> </span
-										></a>
-									</div>
-									<div class="job-post-info">
-										<h4>
-											<a href=""
-												>Digital Marketing Executive</a
-											>
-										</h4>
-										<ul>
-											<li>
-												<i class="fa fa-map-marker"></i>
-												Sacramento, California
-											</li>
-											<li>
-												<i class="fa fa-bookmark-o"></i>
-												Full Time
-											</li>
-											<li>
-												<i class="fa fa-clock-o"></i>
-												Published 11 months ago
-											</li>
-										</ul>
-										<p class="my-2">
-											<i class="fa fa-graduation-cap"></i>
-											Software Engineering - IIT/NIT/BITS
-											- B.Tech/MBA - CSE/EE
-										</p>
-										<p class="my-2">
-											<i class="fa fa-lock"></i>
-											1 - 3 Years | Rs 10 - 20 LPA | Pune
-											India
-										</p>
-										<p class="my-2">
-											<i class="fa fa-tag"></i>
-											#Product Management # Hooked #
-											User-Centric # Mobile Internet
-										</p>
-									</div>
-								</div>
-								<div class="d-flex">
-									<div class="job-time mr-auto">
-										<a
-											href="javascript:void(0);"
-											class="mr-1"
-											><span>Job Description</span></a
-										>
-										<a
-											href="javascript:void(0);"
-											class="ml-1"
-											><span>Send Message</span></a
-										>
-									</div>
-									<div class="salary-bx">
-										<span>$1200 - $ 2500</span>
+										<span>{{ job.expected_salary }}</span>
 									</div>
 								</div>
 								<label class="like-btn">
@@ -516,4 +156,24 @@
 </div>
 
 <app-chat-client></app-chat-client>
+
+<macrax-modal id="chat-home-failed-rest-call">
+    <div class="modal-content text-center">
+        <!--Header-->
+        <div class="modal-header d-flex justify-content-center">
+          <p class="heading">Something went wrong</p>
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+          <i class="fa fa-exclamation-triangle fa-4x animated rotateIn mb-4"></i>
+          <p>Please contact your administrator</p>
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer justify-content-center">
+          <a type="button" class="btn btn-primary waves-effect waves-light" (click)="closeModal('chat-home-failed-rest-call');">Ok</a>
+        </div>
+    </div>
+</macrax-modal>
+
 

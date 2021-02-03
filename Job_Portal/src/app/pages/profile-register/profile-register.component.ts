@@ -18,6 +18,7 @@ import * as RecordRTC from 'recordrtc';
 import * as Record from 'videojs-record/dist/videojs.record.js';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { Router } from '@angular/router';
+import { ResponseModel } from 'src/app/models/reponse.model';
 
 @Component({
 	selector: 'app-profile-register',
@@ -46,6 +47,7 @@ export class ProfileRegisterComponent implements OnInit {
 	selectedAreas :any =[];
 	MultSelectSkill : any= {};
 	ids :any =[];
+	propicUrl='';
 	constructor(private _formBuilder: FormBuilder,
 				private router:Router,
 				private jobSeekerService:JobSeekerService,
@@ -54,6 +56,7 @@ export class ProfileRegisterComponent implements OnInit {
 				private sessionStore: SessionStorageService) { 
 
 		this.player = false;
+		this.propicUrl = ''
 		// save reference to plugin (so it initializes)
 		this.plugin = Record;
 		// video.js configuration
@@ -186,6 +189,20 @@ export class ProfileRegisterComponent implements OnInit {
 			},err=>{
 			
 			});
+	}
+
+	changePropic(event){
+		if(event.target.files.length>0){
+			const file = event.target.files[0];
+			this.uploadService.uploadJdFile(file).subscribe(res=>{
+				//const response = JSON.stringify(res);
+				const r = res;
+				const t= JSON.parse(r);
+				this.propicUrl = t.data;
+			},err=>{
+	
+			})
+		}
 	}
 
 	onItemSelect(item: any) {
@@ -375,7 +392,7 @@ export class ProfileRegisterComponent implements OnInit {
 			},err=>{
 
 			})
-}
+	}
 
 	// reference to the element itself: used to access events and methods
 	private _elementRef: ElementRef

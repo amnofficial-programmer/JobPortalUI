@@ -2,7 +2,7 @@ export class Constants {
    
     public static URL: any = {
 
-        HOST_URL: 'http://macraxuserapiapp-env.eba-e7h2xmg2.ap-south-1.elasticbeanstalk.com/macrax/',
+        HOST_URL: 'https://macraxs.com/macrax/',
         // HOST_URL:'http://localhost:8090/macrax/',
         CHAT_SERVER_URL : 'http://172.31.9.19:3000',
         User_Singup: 'auth/signup',
@@ -23,7 +23,8 @@ export class Constants {
         Upload_Jd_Video:'uplaod/jd/video',
         GetRecruiters: 'auth/users?role=',
         GetJobSeekers: 'auth/users?role=',
-        GetAllHostoricalChats: 'chatserver/getHistoricalChats'
+        GetAllHostoricalChats: 'chatserver/getHistoricalChats',
+        GetAllJobs: 'user/jobs?index='
 
 
 }

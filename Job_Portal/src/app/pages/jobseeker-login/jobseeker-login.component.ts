@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import {SessionStorageService} from 'ngx-webstorage';
+import { MacraxModalService } from '../../_modal';
 
 @Component({
   selector: 'app-jobseeker-login',
@@ -11,12 +12,17 @@ import {SessionStorageService} from 'ngx-webstorage';
 })
 export class JobseekerLoginComponent implements OnInit {
 
-  loginFormJobSeeker: FormGroup;
-  hasFormErrors = false;
+  loginFormJobSeeker: FormGroup
+  hasFormErrors = false
+  errorMessage = ''
+
   constructor(private _formBuilder: FormBuilder, 
               private router:Router,
               private loginService: LoginService,
-              private sessionStore: SessionStorageService) { }
+              private sessionStore: SessionStorageService,
+              private modalService: MacraxModalService) { 
+                this.errorMessage = '';
+              }
 
   ngOnInit() {
     this.loginFormJobSeeker = this._formBuilder.group({
@@ -45,7 +51,8 @@ export class JobseekerLoginComponent implements OnInit {
 
        
       if(res.msg=="Invalid Username/password!"){
-        alert(res.msg);
+            this.errorMessage = res.msg
+            this.modalService.open('custom-macrax-modal-1');
         }else{
           alert("Login sucessfully");
         const responseObj=res['data'];
@@ -62,15 +69,25 @@ export class JobseekerLoginComponent implements OnInit {
         if(responseObj.IsOnboard==0){
           this.router.navigateByUrl('/dashboard/job-seeker-profilereg')
         }else{
-          this.router.navigateByUrl('/dashboard/home')
+          this.router.navigateByUrl('/dashboard/chat-home')
         }
     }
       
     }, err => {
       console.log(err)
-      alert("Login Filed")
+      //alert("Login Filed")
+      this.errorMessage = err.statusText + ", Please contact your Administrator or Support Team"
+      this.modalService.open('custom-macrax-modal-1');
     })
 
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+      this.modalService.close(id);
   }
 
 

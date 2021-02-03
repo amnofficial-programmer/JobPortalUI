@@ -1,0 +1,63 @@
+.example-container {
+    height: 500px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    /* align-items: center; */
+    /* justify-content: center; */
+  }
+  .example-sidenav {
+     user-select: none;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .menu-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+  }
+  .menu-button.rotated {
+    transform: rotate(180deg);
+  }
+  .submenu {
+    overflow-y: hidden;
+    transition: transform 300ms ease;
+    transform: scaleY(0);
+    transform-origin: top;
+    padding-left: 30px;
+  }
+  .submenu.expanded {
+    transform: scaleY(1);
+  }
+
+  i{
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    box-sizing: content-box;
+    border-radius: 50%;
+    padding: 4px;
+    margin-right: 2px;
+}
+
+app-jobseekers{
+    width: 100%;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+app-recruiters{
+    width: 100%;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+
+h1.example-app-name {
+    color: white;
+}
+
+

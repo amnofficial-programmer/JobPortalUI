@@ -48,3 +48,42 @@
 </div>
 
 <app-footer></app-footer>
+
+<macrax-modal id="custom-macrax-modal-1">
+    <div class="modal-content text-center">
+        <!--Header-->
+        <div class="modal-header d-flex justify-content-center">
+          <p class="heading">Login Failed</p>
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+          <i class="fa fa-exclamation-triangle fa-4x animated rotateIn mb-4"></i>
+          <p>{{ errorMessage }}</p>
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer justify-content-center">
+          <a type="button" class="btn btn-primary waves-effect waves-light" (click)="closeModal('custom-macrax-modal-1');">Ok</a>
+        </div>
+    </div>
+</macrax-modal>
+
+<!-- <macrax-modal id="custom-macrax-modal-1">
+    <div class="modal-content text-center">
+        
+        <div class="modal-header d-flex justify-content-center">
+          <p class="heading">Be always up to date</p>
+        </div>
+        
+        <div class="modal-body">
+          <i class="fas fa-bell fa-4x animated rotateIn mb-4"></i>
+          <p>Do you want to receive the push notification about the newest posts?</p>
+        </div>
+
+        
+        <div class="modal-footer justify-content-center">
+          <a type="button" class="btn btn-primary waves-effect waves-light" (click)="closeModal('custom-macrax-modal-1');">Yes</a>
+          <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal" (click)="closeModal('custom-macrax-modal-1');">No</a>
+        </div>
+    </div>
+</macrax-modal> -->

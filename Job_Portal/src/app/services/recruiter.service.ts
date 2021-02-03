@@ -47,4 +47,10 @@ export class RecruiterService {
         return this.http.get<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.GetRecruiters+role,{ headers: httpHeaders,});
     }
 
+    getAllJobs(index:number): Observable<ResponseModel>{
+        const httpHeaders = this.getHTTPHeaders();
+        return this.http.get<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.GetAllJobs+index,{ headers: httpHeaders,});
+    }
+
+
 }

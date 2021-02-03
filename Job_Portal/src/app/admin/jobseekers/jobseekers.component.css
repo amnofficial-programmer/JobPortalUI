@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+    margin-bottom: 0px;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  
+  tr.mat-header-row {
+    height: 40px;
+}
+
+tr.mat-row, tr.mat-footer-row {
+    height: 40px;
+}

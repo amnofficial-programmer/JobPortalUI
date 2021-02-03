@@ -48,6 +48,8 @@ import { RecruiterForgetPasswordComponent } from './pages/recruiter-forget-passw
 import { DemoComponentComponent } from './demo-component/demo-component.component';
 import { ChatClientComponent } from './pages/chat-client/chat-client.component';
 import {NgxWebstorageModule} from 'ngx-webstorage';
+import { AdminModule } from './admin/admin.module';
+import { MacraxModalModule } from './_modal';
 
 @NgModule({
   declarations: [
@@ -96,14 +98,9 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
     NgxDropzoneModule,
     MatSelectModule,
     NgxWebstorageModule.forRoot(), 
+    AdminModule,
+    MacraxModalModule
   ],
-  
-  // exports: [
-  //   MatButtonModule,
-  //   MatFormFieldModule,
-  //   MatInputModule,
-  //   MatRippleModule,
-  // ],
   providers: [
     JobSeekerService,
     RecruiterService,
