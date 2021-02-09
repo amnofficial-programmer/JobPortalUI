@@ -309,7 +309,7 @@ export class RecruiterProfileRegisterComponent implements OnInit {
 			degree: ['', Validators.required],
 			experience: ['', Validators.required],
 			functionalArea: [[], Validators.required],
-			expected_salary: ['', Validators.required],
+			offered_salary: ['', Validators.required],
 			jobLocation: ['', Validators.required],
 			jobRole: ['', Validators.required],
 			skills: [[], Validators.required]
@@ -341,7 +341,7 @@ export class RecruiterProfileRegisterComponent implements OnInit {
 		_recruiter.fullName=controls.fullName.value;
 		_recruiter.profileHeadline=controls.profileHeadline.value;
 		_recruiter.experience=controls.experience.value;
-		_recruiter.expected_salary=controls.expected_salary.value;
+		_recruiter.offered_salary=controls.offered_salary.value;
 		_recruiter.department=controls.department.value;
 		_recruiter.degree=controls.degree.value;
 		_recruiter.companyName=controls.companyName.value;
@@ -366,17 +366,23 @@ export class RecruiterProfileRegisterComponent implements OnInit {
 		
 		if(undefined != this.videoResume.controls['uploadVideo'].value && ''!=this.videoResume.controls['uploadVideo'].value){
 			let videoResponse = JSON.parse(this.videoResume.controls['uploadVideo'].value)
-			_recruiter.vedioUrl = videoResponse.data
+			_recruiter.videoUrl = videoResponse.data
+		}else{
+			_recruiter.videoUrl = 'https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/JdMp4/1000020/video_1607682624170.mp4'
 		}
 
 		if(undefined != this.uploadResume.controls['uploadResume'].value && '' != this.uploadResume.controls['uploadResume'].value){
 			let uploadResume = JSON.parse(this.uploadResume.controls['uploadResume'].value)
 			_recruiter.docUrl = uploadResume.data
+		}else{
+			_recruiter.docUrl = 'https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
 		}
 		
 		if(undefined != this.verification.controls['uploadDocument'].value && '' != this.verification.controls['uploadDocument'].value){
 			let verification = JSON.parse(this.verification.controls['uploadDocument'].value)
 			_recruiter.verificationCardUrl = verification.data
+		}else{
+			_recruiter.verificationCardUrl = 'https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
 		}
 
 		_recruiter.functionalArea=functionalAresofRec;

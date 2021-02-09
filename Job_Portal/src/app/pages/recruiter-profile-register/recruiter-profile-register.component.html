@@ -79,13 +79,13 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Offered Salary:</label>
-                                    <mat-select class="form-control" formControlName="expected_salary">
+                                    <mat-select class="form-control" formControlName="offered_salary">
                                         <mat-option value="">Select from list</mat-option>
                                         <mat-option [value]="salary.salaryRange" *ngFor="let salary of salaryRangesList" >{{salary.salaryRange}}</mat-option>
                                      
                                     </mat-select>
                                     <mat-error>
-                                        <span *ngIf="!createRecruiterCard.get('expected_salary').valid && createRecruiterCard.get('expected_salary').touched">Offered Salary is required</span>
+                                        <span *ngIf="!createRecruiterCard.get('offered_salary').valid && createRecruiterCard.get('offered_salary').touched">Offered Salary is required</span>
                                       </mat-error>
                                 </div>
                             </div>

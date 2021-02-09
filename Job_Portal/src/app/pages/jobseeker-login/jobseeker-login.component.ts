@@ -69,7 +69,7 @@ export class JobseekerLoginComponent implements OnInit {
         if(responseObj.IsOnboard==0){
           this.router.navigateByUrl('/dashboard/job-seeker-profilereg')
         }else{
-          this.router.navigateByUrl('/dashboard/chat-home')
+          this.router.navigateByUrl('dashboard/chat-home')
         }
     }
       

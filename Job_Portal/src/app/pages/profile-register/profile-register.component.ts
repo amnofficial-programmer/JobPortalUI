@@ -196,9 +196,9 @@ export class ProfileRegisterComponent implements OnInit {
 			const file = event.target.files[0];
 			this.uploadService.uploadJdFile(file).subscribe(res=>{
 				//const response = JSON.stringify(res);
-				const r = res;
-				const t= JSON.parse(r);
-				this.propicUrl = t.data;
+				// const r = res;
+				// const t= JSON.parse(r);
+				// this.propicUrl = t.data;
 			},err=>{
 	
 			})
@@ -328,10 +328,12 @@ export class ProfileRegisterComponent implements OnInit {
 			
 		if(undefined != this.videoResume.controls['uploadVideo'].value && ''!=this.videoResume.controls['uploadVideo'].value){
 			let videoResponse = JSON.parse(this.videoResume.controls['uploadVideo'].value)
-			_jobSeeker.vedioUrl = videoResponse.data
+			_jobSeeker.videoUrl = videoResponse.data
 		}else{
-			_jobSeeker.vedioUrl = '';
+			_jobSeeker.videoUrl = '';
 		}
+
+		
 
 		if(undefined != this.uploadResume.controls['uploadResume'].value && '' != this.uploadResume.controls['uploadResume'].value){
 			let uploadResume = JSON.parse(this.uploadResume.controls['uploadResume'].value)

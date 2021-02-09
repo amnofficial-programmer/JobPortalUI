@@ -10,7 +10,7 @@ export class JobSeekerModel  {
 	  experience:string;
 	  companyName:string;
 	  expected_salary:string;
-	  vedioUrl:string;
+	  videoUrl:string;
 	  docUrl:string;
 	  verificationCardUrl:string;
 	  verificationCardId:string;

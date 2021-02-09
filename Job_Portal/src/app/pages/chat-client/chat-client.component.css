@@ -7,7 +7,7 @@
   margin-right: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   border-bottom: 0;
-  background: #212529;
+  background: #2125296e;
   display: block;
 }
 
@@ -43,9 +43,6 @@
   text-align: left;
 }
 
-.ng-chat-title{
-    
-}
 
 .ng-chat-title, .ng-chat-title:hover {
     position: relative;

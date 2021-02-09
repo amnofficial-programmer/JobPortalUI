@@ -4,7 +4,7 @@ export class Constants {
 
         HOST_URL: 'https://macraxs.com/macrax/',
         // HOST_URL:'http://localhost:8090/macrax/',
-        CHAT_SERVER_URL : 'http://172.31.9.19:3000',
+        CHAT_SERVER_URL : 'http://103.12.211.10:3000/',
         User_Singup: 'auth/signup',
         Login:'auth/authenticate',
         Job_Seeker_Add:'user/add/jobSeeker',

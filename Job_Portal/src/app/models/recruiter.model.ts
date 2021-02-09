@@ -16,10 +16,10 @@ export class RecruiterModel {
 	department:string;
 	degree:string;	
 	experience:string;	
-	expected_salary:string;	
+	offered_salary:string;	
 	functionalArea:string;	
 	jobLocation:string;
-	vedioUrl:string;
+	videoUrl:string;
 	userName:string;
 	jobSkills:string[];
 	profileHeadline:string;

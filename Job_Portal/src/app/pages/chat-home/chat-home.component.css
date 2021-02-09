@@ -1,11 +1,16 @@
-.job-bx-title .btn-group.bootstrap-select{
-    float: left;
-}
 
 .criteria{
     height: 50px;
 }
 
-.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){
-    margin: 2px;
+.btn{
+    font-size: 0.7rem;
+}
+
+.dropdown-menu{
+    font-size: 0.7rem;
+}
+
+.sort-label{
+    font-size: 1.1rem;
 }

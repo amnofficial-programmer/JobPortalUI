@@ -3,6 +3,7 @@ import { RecruiterService } from 'src/app/services/recruiter.service';
 import { RecruiterModel } from 'src/app/models/recruiter.model';
 import { MacraxModalService } from '../../_modal';
 import { GeneralUtilityService } from '../../services/general-utility.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,8 +19,9 @@ export class ChatHomeComponent implements OnInit {
 
   constructor(private recruiterService:RecruiterService,
               private modalService: MacraxModalService,
+              private router:Router,
               private generalUtilityService : GeneralUtilityService) {
-    this.currentIndex = 0
+    this.currentIndex = 1
     this.jobs = []
    }
 
@@ -29,6 +31,8 @@ export class ChatHomeComponent implements OnInit {
      */
     if(this.generalUtilityService.LoggedIn()){
       this.getAllJobs(this.currentIndex)
+    }else{
+      this.router.navigateByUrl('dashboard/home')
     }
   }
 
@@ -52,6 +56,11 @@ export class ChatHomeComponent implements OnInit {
   goToLink(url: string, event){
     //event.preventDefault()
     window.open(url);
+  }
+
+  
+  isLoggedIn(){
+    return this.generalUtilityService.LoggedIn();
   }
 
 }

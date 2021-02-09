@@ -2,7 +2,7 @@
 <!-- Filters Search -->
 <div class="section-full browse-job-find">
 	<div class="container">
-		<div class="find-job-bx">	
+		<div class="find-job-bx">
 		</div>
 	</div>
 </div>
@@ -13,65 +13,81 @@
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-md-12">
 					<div class="job-bx-title clearfix">
-						<div class="criteria">
-							<label for="sort">Sort by:</label>
-							<select class="bs-select-hidden">
-								  	<option>Functional Area</option>
-									<option>Web Designing</option>
-									<option>Java</option>
-									<option>PHP</option>
-									<option>Angular</option>
-									<option>React</option>
+						<div class="criteria text-right">
+							<label for="sort" class="sort-label pt-2">Sort by:</label>
 
-							  </select>
-							<select class="bs-select-hidden">
-								<option>Experience</option>
-								<option>Fresher</option>
-								<option>Less than 1 Year</option>
-								<option>1+ Year</option>
-								<option>2+ Year</option>
-								<option>3+ Year</option>
-							</select>
-							<select class="bs-select-hidden">
-								<option>Expected Salary</option>
-								<option>10k</option>
-								<option>10-50k</option>
-								<option>50k-1L</option>
-								<option>1+ L</option>
-							</select>
-							<select class="bs-select-hidden">
-								<option>Qualification</option>
-								<option>Diploma</option>
-								<option>Graduate</option>
-								<option>Post Graduate</option>
-							</select>
-							<select class="bs-select-hidden">
-								<option>Course</option>
-								<option>B.Tech.</option>
-								<option>B.C.A.</option>
-								<option>M.Tech.</option>
-								<option>M.C.A.</option>
-							</select>
+							<div class="dropdown text-secondary d-inline m-1">
+								<button class="btn border text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Functional Area
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								  <a class="dropdown-item" href="#">Web Designing</a>
+								  <a class="dropdown-item" href="#">React</a>
+								  <a class="dropdown-item" href="#">Java</a>
+								  <a class="dropdown-item" href="#">PHP</a>
+								  <a class="dropdown-item" href="#">Angular</a>
+								</div>
+							  </div>
+
+							  <div class="dropdown d-inline m-1">
+								<button class="btn border text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Experience
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="#">Fresher</a>
+									<a class="dropdown-item" href="#">Less than 1 Year</a>
+									<a class="dropdown-item" href="#">1+ Year</a>
+									<a class="dropdown-item" href="#">2+ Year</a>
+									<a class="dropdown-item" href="#">3+ Year</a>
+								</div>
+							  </div>
+
+							  <div class="dropdown d-inline m-1">
+								<button class="btn border text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Expected Salary
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="#">10k</a>
+									<a class="dropdown-item" href="#">10-50k</a>
+									<a class="dropdown-item" href="#">50k-1L</a>
+									<a class="dropdown-item" href="#">1+ L</a>
+								</div>
+							  </div>
+							  <div class="dropdown d-inline m-1">
+								<button class="btn border text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Qualification
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="#">Diploma</a>
+									<a class="dropdown-item" href="#">Graduate</a>
+									<a class="dropdown-item" href="#">Post Graduate</a>
+								</div>
+							  </div>
+							  <div class="dropdown d-inline m-1">
+								<button class="btn border text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Course
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="#">B.Tech.</a>
+									<a class="dropdown-item" href="#">B.C.A.</a>
+									<a class="dropdown-item" href="#">M.Tech.</a>
+									<a class="dropdown-item" href="#">M.C.A.</a>
+								</div>
+							  </div>
 						</div>
 					</div>
 					<ul class="post-job-bx">
-						<li *ngFor= "let job of jobs">
+						<li *ngFor="let job of jobs">
 							<div class="post-bx">
 								<div class="d-flex m-b30">
 									<div class="job-post-company">
 										<a href="javascript:void(0);">
 											<span>
-												<img
-													alt=""
-													src="./assets/images/logo/icon1.png"
-												/> </span
-										></a>
+												<img alt="" src="./assets/images/logo/icon1.png" /> </span></a>
 									</div>
 									<div class="job-post-info">
 										<h4>
-											<a href=""
-												>{{ job.jobRole }}</a
-											>
+											<a href="">{{ job.jobRole }}</a>
 										</h4>
 										<ul>
 											<li>
@@ -99,7 +115,7 @@
 										</p>
 										<p class="my-2">
 											<i class="fa fa-tag"></i>&nbsp;
-											<span *ngFor = " let skill of job.jobSkills">{{skill}}</span>
+											<span *ngFor=" let skill of job.jobSkills">{{skill}}</span>
 											<!-- #Product Management # Hooked #
 											User-Centric # Mobile Internet -->
 										</p>
@@ -107,17 +123,9 @@
 								</div>
 								<div class="d-flex">
 									<div class="job-time mr-auto">
-										<a
-											href="dashboard/chat-home"
-											(click)="goToLink(job.vedioUrl)"
-											class="mr-1"
-											><span>Job Description</span></a
-										>
-										<a
-											href="javascript:void(0);"
-											class="ml-1"
-											><span>Send Message</span></a
-										>
+										<a href="dashboard/chat-home" (click)="goToLink(job.videoUrl)"
+											class="mr-1"><span>Job Description</span></a>
+										<a href="javascript:void(0);" class="ml-1"><span>Send Message</span></a>
 									</div>
 									<div class="salary-bx">
 										<span>{{ job.expected_salary }}</span>
@@ -133,9 +141,7 @@
 					<div class="pagination-bx m-t30">
 						<ul class="pagination">
 							<li class="previous">
-								<a href="javascript:void(0);"
-									><i class="ti-arrow-left"></i> Prev</a
-								>
+								<a href="javascript:void(0);"><i class="ti-arrow-left"></i> Prev</a>
 							</li>
 							<li class="active">
 								<a href="javascript:void(0);">1</a>
@@ -143,9 +149,7 @@
 							<li><a href="javascript:void(0);">2</a></li>
 							<li><a href="javascript:void(0);">3</a></li>
 							<li class="next">
-								<a href="javascript:void(0);"
-									>Next <i class="ti-arrow-right"></i
-								></a>
+								<a href="javascript:void(0);">Next <i class="ti-arrow-right"></i></a>
 							</li>
 						</ul>
 					</div>
@@ -154,26 +158,27 @@
 		</div>
 	</div>
 </div>
-
-<app-chat-client></app-chat-client>
+<!-- Our Latest Blog -->
+<div *ngIf="isLoggedIn()">
+	<app-chat-client></app-chat-client>
+</div>
 
 <macrax-modal id="chat-home-failed-rest-call">
-    <div class="modal-content text-center">
-        <!--Header-->
-        <div class="modal-header d-flex justify-content-center">
-          <p class="heading">Something went wrong</p>
-        </div>
-        <!--Body-->
-        <div class="modal-body">
-          <i class="fa fa-exclamation-triangle fa-4x animated rotateIn mb-4"></i>
-          <p>Please contact your administrator</p>
-        </div>
+	<div class="modal-content text-center">
+		<!--Header-->
+		<div class="modal-header d-flex justify-content-center">
+			<p class="heading">Something went wrong</p>
+		</div>
+		<!--Body-->
+		<div class="modal-body">
+			<i class="fa fa-exclamation-triangle fa-4x animated rotateIn mb-4"></i>
+			<p>Please contact your administrator</p>
+		</div>
 
-        <!--Footer-->
-        <div class="modal-footer justify-content-center">
-          <a type="button" class="btn btn-primary waves-effect waves-light" (click)="closeModal('chat-home-failed-rest-call');">Ok</a>
-        </div>
-    </div>
+		<!--Footer-->
+		<div class="modal-footer justify-content-center">
+			<a type="button" class="btn btn-primary waves-effect waves-light"
+				(click)="closeModal('chat-home-failed-rest-call');">Ok</a>
+		</div>
+	</div>
 </macrax-modal>
-
-
