@@ -51,6 +51,26 @@ export class FileUploadService {
         return this.http.post<ResponseModel>(Constants.URL.HOST_URL + Constants.URL.Upload_Jd_File,formData,requestOptions);
 
     }
+
+    uploadProfileFile(file): Observable<ResponseModel> {
+           
+        var formData = new FormData();
+        formData.append('file', file);
+    
+        const httpParams =new HttpParams()
+        .set('emailId', this.emailId)
+      
+            const httpHeaders = this.getHTTPHeaders();
+            const requestOptions: Object = {
+                /* other options here */
+                headers: httpHeaders,
+                params:httpParams,
+                responseType: 'json',
+              }
+            // headers: httpHeaders,responseType: 'text'}
+            return this.http.post<ResponseModel>(Constants.URL.HOST_URL + Constants.URL.Upload_Profile_File,formData,requestOptions);
+    
+        }
     uploadJdVideo(file): Observable<ResponseModel> {
         var formData = new FormData();
         formData.append('file', file,"video_"+Date.now()+".mp4");

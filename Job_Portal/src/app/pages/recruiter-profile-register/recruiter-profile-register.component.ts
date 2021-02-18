@@ -29,6 +29,7 @@ import { Router } from '@angular/router';
 export class RecruiterProfileRegisterComponent implements OnInit {
 
 	isLinear = false;
+	propicUrl=''
 	createRecruiterCard: FormGroup;
 	videoResume: FormGroup;
 	uploadResume: FormGroup;
@@ -78,7 +79,7 @@ export class RecruiterProfileRegisterComponent implements OnInit {
 				private sessionStore: SessionStorageService) { 
 
 		this.player = false;
-
+		this.propicUrl ='';
 		// save reference to plugin (so it initializes)
 		this.plugin = Record;
 	
@@ -243,6 +244,26 @@ export class RecruiterProfileRegisterComponent implements OnInit {
 			},err=>{
 			
 			});
+	}
+
+	
+	changePropic(event){
+		if(event.target.files.length>0){
+			const file = event.target.files[0];
+			this.uploadService.uploadProfileFile(file).subscribe(res=>{ 
+				const response = res.data
+				this.propicUrl = response['url']
+			},err=>{
+	
+			})
+		}
+	}
+
+	getProfilePic(){
+
+		if(!this.propicUrl || undefined == this.propicUrl || "" ==this.propicUrl)
+			return "/assets/images/lines.png"
+		return this.propicUrl;
 	}
 
 	onItemSelect(item: any) {

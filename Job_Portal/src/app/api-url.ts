@@ -19,13 +19,14 @@ export class Constants {
         Add_Recruiter:'user/recruiter/onboarding',
 
         Upload_Jd_File:'uplaod/jd/doc',
+        Upload_Profile_File:'uplaod/profile',
         Upload_Verification_Doc:'uplaod/verification/doc',
         Upload_Jd_Video:'uplaod/jd/video',
         GetRecruiters: 'auth/users?role=',
         GetJobSeekers: 'auth/users?role=',
         GetAllHostoricalChats: 'chatserver/getHistoricalChats',
-        GetAllJobs: 'user/jobs?index='
-
+        GetAllJobs: 'user/jobs?index=',
+        GetAllJobSeekers:'user/active/jobSeeker'
 
 }
 public static Roles:any={

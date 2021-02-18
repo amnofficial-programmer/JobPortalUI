@@ -105,6 +105,10 @@ export class ChatClientComponent implements OnInit {
     
   }
 
+  messagesAdded(){
+    console.log("Changed ")
+  }
+
   getStatusClass(message:Message){
     if(message['status'] === 'DELIVERED'){
       return 'status-delivered';

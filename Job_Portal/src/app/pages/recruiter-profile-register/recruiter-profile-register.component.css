@@ -18,3 +18,43 @@
 .video-js .vjs-tech{
     align-items: center;
 }
+
+
+.profile-pic{
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c5c5aa;
+  color: black;
+  margin: 5px;
+  margin-left: 2%;
+  margin-bottom: 20px;
+}
+
+.profile-pic img{
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+
+.profile-pic:hover .edit {
+	display: block;
+}
+
+.edit {
+	padding-top: 7px;	
+	padding-right: 7px;
+	position: absolute;
+	/* right: 0; */
+  bottom: 20%;
+  display: none;
+  left: 9%;
+}
+
+.edit a {
+	color: #000;
+}

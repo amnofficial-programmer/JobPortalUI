@@ -1,6 +1,6 @@
 export class Constants {
     public static URL: any = {
-        HOST_URL: 'http://macrax-admin-app-api-test.ap-south-1.elasticbeanstalk.com/',
+        HOST_URL: 'https://macraxs.com/macrax/',
         DashboardRecuriterGellAll: 'recruiter/get/all/records',
         DashboardJobseekerGetAll: 'jobseeker/get/all/records',
         Recuriter: 'recruiter/list',

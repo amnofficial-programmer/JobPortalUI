@@ -1,9 +1,13 @@
 <div id="ng-chat" class="dark-theme">
     <a #ngChatTitle class="ng-chat-title secondary-background shadowed setMargin" (click)="toggleChat()"><span> Messages </span></a>
     <div id="ng-chat-people" #ngChatPeople> 
-      <input class="friends-search-bar ng-untouched ng-pristine ng-valid" id="ng-chat-search_friend" type="search" placeholder="Search">
+      <div class="md-form text-secondary mt-2 p-2">
+        <input class="form-control chat-search-input" type="search" id="search1" aria-label="Search" mdbInput>
+        <label for="search1" class="p-2">Search</label>
+      </div>
+      <!-- <input class="friends-search-bar ng-untouched ng-pristine ng-valid" id="ng-chat-search_friend" type="search" placeholder="Search"> -->
       <ul id="ng-chat-users" class="offset-search">
-        <li [id]="user.id" *ngFor="let user of users" (click)="openChatWithUser($event, user)">
+        <li [id]="user.id" class="ng-chat-user-row" *ngFor="let user of users" (click)="openChatWithUser($event, user)">
           <div class="ng-chat-friends-list-container">
             <img alt="" class="avatar" height="30" width="30" src="https://66.media.tumblr.com/avatar_9dd9bb497b75_128.pnj">
             <strong title="Arya Stark">{{ user.userName }}</strong>
@@ -44,9 +48,9 @@
         <a class="ng-chat-close primary-text" (click)="closeNgChatWindow(user)">X</a>
       </div>
       <div #ngChatWindowContainer  class="ng-chat-window-container">
-        <div class="ng-chat-messages primary-background">
-          <div *ngFor="let message of user.messages">
-            <div class="ng-chat-message ng-chat-message-received" *ngIf="!isCurrentUser(message['from_id']); else other_content">
+        <div class="ng-chat-messages primary-background" >
+          <div *ngFor="let message of user.messages" (change)= "messagesAdded()">
+            <div class="ng-chat-message ng-chat-message-received"  *ngIf="!isCurrentUser(message['from_id']); else other_content">
               <img alt="" class="avatar" height="30" width="30" src="https://pbs.twimg.com/profile_images/378800000449071678/27f2e27edd119a7133110f8635f2c130.jpeg">
               <div class="received-chat-message-container">
                 <span>{{ message.text }}</span>

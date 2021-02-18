@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="profile-pic">
-                                    <img src="https://lh3.googleusercontent.com/ogw/ADGmqu_6vZ-1JkldH8haIrf3Y8MxzetQCeJhl9mf0yAmdg=s192-c-mo">
+                                    <img [src]="getProfilePic()">
                                     <div class="edit">
                                         <label for="file">
                                             <input type="file" id="file" style="display: none" name="propic" accept="image/gif,image/jpeg,image/jpg,image/png" (change)="changePropic($event)">

@@ -30,6 +30,7 @@ export class ProfileRegisterComponent implements OnInit {
 	isLinear = false;
 	createJobSeekerCard: FormGroup;
 	videoResume: FormGroup;
+	profilePicture: FormGroup;
 	uploadResume: FormGroup;
 	verification: FormGroup;
 	chatWithRecruiter: FormGroup;
@@ -194,15 +195,19 @@ export class ProfileRegisterComponent implements OnInit {
 	changePropic(event){
 		if(event.target.files.length>0){
 			const file = event.target.files[0];
-			this.uploadService.uploadJdFile(file).subscribe(res=>{
-				//const response = JSON.stringify(res);
-				// const r = res;
-				// const t= JSON.parse(r);
-				// this.propicUrl = t.data;
+			this.uploadService.uploadProfileFile(file).subscribe(res=>{ 
+				const response = res.data
+				this.propicUrl = response['url']
 			},err=>{
 	
 			})
 		}
+	}
+
+	getProfilePic(){
+		if(!this.propicUrl || undefined == this.propicUrl || "" ==this.propicUrl)
+			return "/assets/images/lines.png"
+		return this.propicUrl;
 	}
 
 	onItemSelect(item: any) {
@@ -263,11 +268,16 @@ export class ProfileRegisterComponent implements OnInit {
 			experience: ['', Validators.required],
 			functionalArea: [[], Validators.required],
 			expected_salary: ['', Validators.required],
-			skills: [[], Validators.required]
+			skills: [[], Validators.required],
+			profilePicture:['', Validators.required]
 		});
 		
 		this.videoResume = this._formBuilder.group({
 			uploadVideo: ['', Validators.required]
+		});
+
+		this.profilePicture = this._formBuilder.group({
+			profilePicture: ['', Validators.required]
 		});
 		this.uploadResume = this._formBuilder.group({
 			uploadResume: ['', Validators.required]
@@ -310,7 +320,7 @@ export class ProfileRegisterComponent implements OnInit {
 		//var username = localStorage.getItem('macrax-emailId')
 		var username = this.sessionStore.retrieve('macrax-emailId')
 		_jobSeeker.userName = username
-
+		_jobSeeker.profileUrl = this.propicUrl;
 	
 	
 		var funcationArea:string[]=[];
@@ -333,8 +343,6 @@ export class ProfileRegisterComponent implements OnInit {
 			_jobSeeker.videoUrl = '';
 		}
 
-		
-
 		if(undefined != this.uploadResume.controls['uploadResume'].value && '' != this.uploadResume.controls['uploadResume'].value){
 			let uploadResume = JSON.parse(this.uploadResume.controls['uploadResume'].value)
 			_jobSeeker.docUrl = uploadResume.data
@@ -347,7 +355,7 @@ export class ProfileRegisterComponent implements OnInit {
 		
 		_jobSeeker.functionalArea=funcationArea;
 		_jobSeeker.verificationCardId='2'
-		_jobSeeker.profileUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
+		//_jobSeeker.profileUrl='https://macrax-upload-buckets.s3.ap-south-1.amazonaws.com/VerificationDoc/13/CoverLetter4Dec.docx'
 		_jobSeeker.skills=skill;
 		return _jobSeeker
 	}

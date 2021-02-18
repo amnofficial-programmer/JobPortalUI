@@ -60,7 +60,8 @@ export class RecruiterLoginComponent implements OnInit {
       if(responseObj.IsOnboard==0){
         this.router.navigateByUrl('/dashboard/recruiter-profilereg')
       }else{
-        this.router.navigateByUrl('/dashboard/home')
+      //  this.router.navigateByUrl('/dashboard/home')
+        this.router.navigateByUrl('/dashboard/recruiter-profilereg')
       }
     }
     }, err => {
