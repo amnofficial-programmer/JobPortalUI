@@ -14,3 +14,78 @@ table {
 tr.mat-row, tr.mat-footer-row {
     height: 40px;
 }
+
+.mat-row:hover {
+  background-color: #b78eec;
+}
+
+
+.modal {
+  width: 80%;
+  left: 17%;
+}
+
+.modal-dialog{
+  height:calc(100% - 60px);
+}
+
+.modal-header{
+  background-color: #724faf;
+}
+.modal-content{
+  height:100%;
+}
+.modal .modal-content{
+  overflow:hidden;
+}
+.modal-body{
+  height:calc(100% - 125px);
+  overflow-y: scroll;
+}
+
+
+.user-heading{
+  margin-left: 5px;
+  margin-top: 2px;
+  font-size: 21px;
+  color: white;
+  font-weight: 600;
+}
+.profile-pic{
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c5c5aa;
+  color: black;
+  margin: 5px;
+  margin-left: 2%;
+  margin-bottom: 20px;
+}
+
+.profile-pic img{
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+
+.profile-pic:hover .edit {
+	display: block;
+}
+
+.edit {
+	padding-top: 7px;	
+	padding-right: 7px;
+	position: absolute;
+	/* right: 0; */
+  bottom: 20%;
+  display: none;
+  left: 9%;
+}
+
+.edit a {
+	color: #000;
+}

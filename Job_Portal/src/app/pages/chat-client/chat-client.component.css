@@ -1,3 +1,8 @@
+.messages{
+    font-weight: 700;
+    font-size: 1rem;
+}
+
 #ng-chat-people{
   position: relative;
   width: 240px;
@@ -7,7 +12,7 @@
   margin-right: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   border-bottom: 0;
-  background: #2125296e;
+  background: white;
   display: block;
 }
 
@@ -37,11 +42,11 @@
 }
 
 .dark-theme .primary-background {
-    background-color: #565656;
+    background-color: white;
 }
 
 .dark-theme, .dark-theme .primary-text {
-    color: #fff;
+    color: black;
     font-family: Arial,Helvetica,sans-serif;
 }
 
@@ -207,10 +212,6 @@ img {
     color: #444;
 }
 
-.dark-theme, .dark-theme .primary-text {
-    color: #fff;
-    font-family: Arial,Helvetica,sans-serif;
-}
 
 .ng-chat-unread-messages-count {
     margin-left: 5px;
@@ -240,7 +241,7 @@ img {
 }
 
 .dark-theme .secondary-background {
-    background-color: #444;
+    background-color: #e6dfdf;
 }
 
 .ng-chat-close {
@@ -248,14 +249,10 @@ img {
     float: right;
 }
 
-.dark-theme, .dark-theme .primary-text {
-    color: #fff;
-    font-family: Arial,Helvetica,sans-serif;
-}
-
 .ng-chat-window .ng-chat-window-container{
   display: block;
   height: 100%;
+  border: none;
 }
 
 .ng-chat-window .ng-chat-messages {
@@ -324,7 +321,7 @@ img{
 }
 
 .dark-theme .file-message-container.received, .dark-theme .received-chat-message-container {
-    background-color: #565656;
+    background-color: white;
     border-color: #444;
 }
 
@@ -360,8 +357,8 @@ img{
 }
 
 .dark-theme .chat-window-input {
-    background-color: #444;
-    color: #fff;
+    background-color: white;
+    color: #444;
 }
 
 .dark-theme .file-message-container, .dark-theme .sent-chat-message-container {

@@ -4,7 +4,8 @@ import { RecruiterModel } from 'src/app/models/recruiter.model';
 import { MacraxModalService } from '../../_modal';
 import { GeneralUtilityService } from '../../services/general-utility.service';
 import { Router } from '@angular/router';
-
+import { JobSeekerService } from 'src/app/services/job-seeker.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-chat-home',
@@ -15,17 +16,30 @@ export class ChatHomeComponent implements OnInit {
 
   currentIndex = 0
   jobs: RecruiterModel[]
-
+  noOfPages:number[]
+  totalPages:number
+  pageEvent: PageEvent;
+ // datasource: null;
+  pageIndex:number;
+  pageSize:number;
+  length:number;
 
   constructor(private recruiterService:RecruiterService,
               private modalService: MacraxModalService,
               private router:Router,
+              private jobSeerkerService:JobSeekerService,
               private generalUtilityService : GeneralUtilityService) {
     this.currentIndex = 1
     this.jobs = []
+    this.noOfPages = [1,2,3];
+   // this.totalPages=8
+    this.pageIndex = 0;
+    this.pageSize = 10;
    }
 
   ngOnInit(): void {
+
+    this.calculateNoOfpages()
     /**
      * Execute this only when user logged in
      */
@@ -34,6 +48,39 @@ export class ChatHomeComponent implements OnInit {
     }else{
       this.router.navigateByUrl('dashboard/home')
     }
+
+  }
+
+  calculateNoOfpages(){
+    this.jobSeerkerService.getJobsCount().subscribe(response =>{
+      console.log(response.data.allRecord)
+      //this.noOfPages=Array.from({length: response.data.allRecord}, (_, i) => i + 1)
+      this.length = response.data.allRecord
+    })
+  }
+
+  getJobsData(event?:PageEvent){
+    const index = event.pageIndex
+    this.jobs = []
+    this.recruiterService.getAllJobs(index).subscribe(
+      response =>{
+        if(response.status != 200) {
+          // handle error
+
+        } else {
+          this.jobs = response.data;
+          this.pageIndex = index
+          this.pageSize = this.pageSize;
+          this.length = this.length;
+        }
+      },
+      error =>{
+        // handle error
+      }
+    );
+
+    console.log(event);
+    return event;
   }
 
   getAllJobs(index:number){

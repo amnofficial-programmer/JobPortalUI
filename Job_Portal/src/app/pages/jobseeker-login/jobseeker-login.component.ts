@@ -4,6 +4,8 @@ import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import {SessionStorageService} from 'ngx-webstorage';
 import { MacraxModalService } from '../../_modal';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-jobseeker-login',
@@ -20,7 +22,8 @@ export class JobseekerLoginComponent implements OnInit {
               private router:Router,
               private loginService: LoginService,
               private sessionStore: SessionStorageService,
-              private modalService: MacraxModalService) { 
+              private modalService: MacraxModalService,
+              private toastrService: ToastrService) { 
                 this.errorMessage = '';
               }
 
@@ -46,15 +49,14 @@ export class JobseekerLoginComponent implements OnInit {
     }
 
     this.loginService.loginUser(this.loginFormJobSeeker.value).subscribe(res => {
-      console.log(res);
-     
-
-       
       if(res.msg=="Invalid Username/password!"){
-            this.errorMessage = res.msg
-            this.modalService.open('custom-macrax-modal-1');
+          this.toastrService.error('Invalid Username or Password', 'Major Error', {
+            timeOut: 2000,
+          });
         }else{
-          alert("Login sucessfully");
+          this.toastrService.success('Login Successful', 'Success', {
+            timeOut: 2000,
+          });
         const responseObj=res['data'];
         //localStorage.setItem('macrax-token',responseObj.token);
         //localStorage.setItem('macrax-emailId',responseObj.userName);

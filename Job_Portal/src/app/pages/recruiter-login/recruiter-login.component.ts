@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import {SessionStorageService} from 'ngx-webstorage';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class RecruiterLoginComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, 
               private router:Router, 
               private loginService: LoginService,
-              private sessionStore: SessionStorageService) { }
+              private sessionStore: SessionStorageService,
+              private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.loginFormRecruiter = this._formBuilder.group({
@@ -42,34 +44,37 @@ export class RecruiterLoginComponent implements OnInit {
       console.log(res);
    
       if(res.msg=="Invalid Username/password!"){
-        alert(res.msg);
+        this.toastrService.error('Invalid Username or Password', 'Major Error', {
+          timeOut: 2000,
+        });
         }else{
-          alert("Login sucessfully");
-      const responseObj=res['data'];
-     // localStorage.setItem('macrax-token',responseObj.token);
-     // localStorage.setItem('macrax-emailId',responseObj.userName);
-      //localStorage.setItem('macrax-password',this.loginFormRecruiter.value.password);
-      localStorage.setItem('macrax-userId',responseObj.uid);
-      localStorage.setItem('role','1');
-      this.sessionStore.store('macrax-token',responseObj.token);
-      this.sessionStore.store('macrax-emailId',responseObj.userName);
-      //this.sessionStore.store('macrax-password',this.loginFormJobSeeker.value.password);
-      this.sessionStore.store('macrax-userId',responseObj.uid);
-      this.sessionStore.store('role','1');
-        
-      if(responseObj.IsOnboard==0){
-        this.router.navigateByUrl('/dashboard/recruiter-profilereg')
-      }else{
-      //  this.router.navigateByUrl('/dashboard/home')
-        this.router.navigateByUrl('/dashboard/recruiter-profilereg')
-      }
+          this.toastrService.success('Login Successful','Success', {
+            timeOut: 2000,
+          });
+          const responseObj=res['data'];
+        // localStorage.setItem('macrax-token',responseObj.token);
+        // localStorage.setItem('macrax-emailId',responseObj.userName);
+          //localStorage.setItem('macrax-password',this.loginFormRecruiter.value.password);
+          localStorage.setItem('macrax-userId',responseObj.uid);
+          localStorage.setItem('role','1');
+          this.sessionStore.store('macrax-token',responseObj.token);
+          this.sessionStore.store('macrax-emailId',responseObj.userName);
+          //this.sessionStore.store('macrax-password',this.loginFormJobSeeker.value.password);
+          this.sessionStore.store('macrax-userId',responseObj.uid);
+          this.sessionStore.store('role','1');
+            
+          if(responseObj.IsOnboard==0){
+            this.router.navigateByUrl('/dashboard/recruiter-profilereg')
+          }else{
+            this.router.navigateByUrl('/dashboard/home')
+            //this.router.navigateByUrl('/dashboard/recruiter-profilereg')
+          }
     }
     }, err => {
       console.log(err)
-      alert("Login Filed")
+      this.toastrService.error('Login Failed', 'Major Error', {
+        timeOut: 3000,
+      });
     })
-
   }
-
-
 }

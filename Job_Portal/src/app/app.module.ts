@@ -50,6 +50,8 @@ import { ChatClientComponent } from './pages/chat-client/chat-client.component';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import { AdminModule } from './admin/admin.module';
 import { MacraxModalModule } from './_modal';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,9 @@ import { MacraxModalModule } from './_modal';
     MatSelectModule,
     NgxWebstorageModule.forRoot(), 
     AdminModule,
-    MacraxModalModule
+    MacraxModalModule,
+    MatPaginatorModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     JobSeekerService,

@@ -9,9 +9,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AdminRecruiterService {
-	constructor(private http: HttpClient, private sessionStore: SessionStorageService) { 
+  
+  constructor(private http: HttpClient, private sessionStore: SessionStorageService) { 
     
   }
+
+  getHTTPHeaders(): HttpHeaders {
+    let result = new HttpHeaders();
+    result = result.set('Content-Type', 'application/json');
+    return result;
+  }
+  
 
   getRecruiterList(verificationStatus, index):Observable<ResponseModel> {
     // ?verificationStatus=2&index=0
@@ -20,6 +28,12 @@ export class AdminRecruiterService {
         .set('index', index);
 
     return this.http.get<ResponseModel>(Constants.URL.HOST_URL + Constants.URL.Recuriter, { params: httpParams });
+  }
+
+  updateRecruiterVerificationStatus(updateObj):Observable<ResponseModel> {
+    const httpHeaders = this.getHTTPHeaders();
+
+    return this.http.post<ResponseModel>(Constants.URL.HOST_URL + Constants.URL.updateRecruiter, updateObj,{ headers:httpHeaders,});
   }
 
 

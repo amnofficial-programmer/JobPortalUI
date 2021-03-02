@@ -22,6 +22,11 @@ export class ChatClientComponent implements OnInit {
   currentRight :number;
   userId:string;
 
+  ngchatwindowwidth = '240px'
+  ngchatwindowheight = '360px'
+  firstwindowPosition = 280
+  expectFirstwindowsposition = 320
+
   recruiter : UserModel[]=[];
 
   ngChatWindows: UserModel[];
@@ -181,7 +186,7 @@ export class ChatClientComponent implements OnInit {
     }else{
       this.ngChatPeople.nativeElement.style.display = 'none';
       this.ngChatTitle.nativeElement.style.marginRight = '10px';
-      this.ngChatTitle.nativeElement.style.width = '240px';
+      this.ngChatTitle.nativeElement.style.width = this.ngchatwindowwidth;
     }   
   }
 
@@ -219,10 +224,10 @@ export class ChatClientComponent implements OnInit {
      
       var position = '';
       if(this.ngChatWindows.length <=0 ){
-        this.currentRight = this.currentRight + 280;
+        this.currentRight = this.currentRight + this.firstwindowPosition;
         position = this.currentRight.toString()+'px'
       }else{
-        this.currentRight = this.currentRight + 320;
+        this.currentRight = this.currentRight + this.expectFirstwindowsposition;
         position = this.currentRight.toString()+'px'
       }
       user.setRightPosition(position);    
@@ -312,7 +317,7 @@ export class ChatClientComponent implements OnInit {
           let container = div.nativeElement.querySelector('.ng-chat-window-container');
           if(container.style.display === 'none'){
             container.style.display = 'block'
-            div.nativeElement.style.height = '360px'
+            div.nativeElement.style.height = this.ngchatwindowheight
           }else{
             container.style.display = 'none'
             div.nativeElement.style.height = '30px'

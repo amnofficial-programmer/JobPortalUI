@@ -13,6 +13,12 @@ export class AdminJobseekersService {
 	constructor(private http: HttpClient, private sessionStore: SessionStorageService) { 
     //this.token = sessionStore.retrieve('macrax-token');
   }
+
+  getHTTPHeaders(): HttpHeaders {
+    let result = new HttpHeaders();
+    result = result.set('Content-Type', 'application/json');
+    return result;
+  }
   
   getJobSeekerList(verificationStatus, index):Observable<ResponseModel> {
     // ?verificationStatus=2&index=0
@@ -22,4 +28,12 @@ export class AdminJobseekersService {
 
     return this.http.get<ResponseModel>(Constants.URL.HOST_URL + Constants.URL.JobSeeker, { params: httpParams });
   }
+
+   
+  updateJobSeekerVerificationStatus(updateObj):Observable<ResponseModel> {
+    const httpHeaders = this.getHTTPHeaders();
+
+    return this.http.post<ResponseModel>(Constants.URL.HOST_URL + Constants.URL.updateJobSeeker, updateObj,{ headers:httpHeaders,});
+  }
+
 }

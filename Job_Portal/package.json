@@ -30,6 +30,7 @@
     "ng-multiselect-dropdown": "^0.2.10",
     "ng2-multiselect": "^1.0.2",
     "ngx-dropzone": "^2.2.2",
+    "ngx-toastr": "^13.2.0",
     "ngx-webstorage": "^6.0.0",
     "rxjs": "~6.6.0",
     "socket.io-client": "^3.0.3",

@@ -14,3 +14,7 @@
 .sort-label{
     font-size: 1.1rem;
 }
+
+.mat-paginator-container::ng-deep{
+    justify-content: flex-start;
+}

@@ -20,7 +20,6 @@
                                             <i class="fa fa-camera"></i>
                                         </label> 
                                     </div>
-                                
                                 </div>
                             </div>
                         </div>
@@ -59,7 +58,6 @@
                                         <span *ngIf="!createJobSeekerCard.get('college').valid && createJobSeekerCard.get('college').touched">College is required</span>
                                       </mat-error>
                                 </div>
-
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
@@ -68,7 +66,7 @@
                                         formControlName="companyName">
                                         <mat-error>
                                             <span *ngIf="!createJobSeekerCard.get('companyName').valid && createJobSeekerCard.get('companyName').touched">Company Name is required</span>
-                                          </mat-error>
+                                        </mat-error>
                                 </div>
                             </div>
                            </div>
@@ -79,7 +77,6 @@
                                     <mat-select class="form-control" id="degree" formControlName="degree"  >
                                         <mat-option [value]="">Select from list</mat-option>
                                         <mat-option *ngFor="let degree of degreeList" [value]="degree.degreeName"  (click)="onChangeDegreeCombox($event, degree.degreeName)">{{degree.degreeName}}</mat-option>
-
                                     </mat-select>
                                     <mat-error>
                                         <span *ngIf="!createJobSeekerCard.get('degree').valid && createJobSeekerCard.get('degree').touched">Degree is required</span>
@@ -134,10 +131,6 @@
                             <div class="col-lg-6 col-md-6">
                               <div class="form-group">
                                 <label>Functional Area:</label>
-                                    <!-- <select class="form-control" formControlName="functionalArea">
-                                        <option value="">Select from list</option>
-                                        <option value="funcationAreas.functionalArea" *ngFor="let funcationAreas of functaionAreaList" (onchange)="onChangeFunctionaAreaCombox(funcationAreas.id)" >{{funcationAreas.functionalArea}}</option>
-                                    </select> -->
                                     <ng-multiselect-dropdown [placeholder]="'Multi select'"   (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" 
                                     (onDeSelect)="onItemDeSelect($event)"  (onDeSelectAll)="onDeSelectAll($event)"[data]="functaionAreaList" formControlName="functionalArea"
                                     [settings]="MultSelect">
@@ -193,12 +186,11 @@
                                 <h3> 3] Please ensure that you are wearing a decent attire and in a silent area</h3>
                                    
                                 <h3>  4] Ensure to cover your core values and achievements within 60 Seconds of video</h3>
-                                <!-- <button class="text-center site-button m-b30 m-r30" (click)="allowCamera()">Allow</button> -->
                            
                             </div>
                             <!-- <ng-container *ngIf="ifAllowCamera"> -->
                                 <video id="video_{{idx}}" class="video-js vjs-default-skin" playsinline></video>
-            
+
                             <mat-error>
                                 <span *ngIf="!videoResume.get('uploadVideo').valid && videoResume.get('uploadVideo').touched">Resume is required</span>
                               </mat-error>
@@ -213,26 +205,13 @@
             <mat-step [stepControl]="uploadResume" label="Upload Resume">
                 <div class="job-bx job-profile">
                     <div class="job-bx-title clearfix">
-                        <h5 class="font-weight-700 text-uppercase">Upload your updated Resume. Macrax support PDF, DOC,
+                        <h5 class="font-weight-700 text-uppercase">Upload your updated Resume. Tier1Jobs support PDF, DOC,
                             and DOCX formats only</h5>
                     </div>
 
                     <form class="attach-resume" [formGroup]="uploadResume">
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
-                                <!-- <div class="form-group">
-                                    <div class="custom-file">
-                                        <p class="m-auto align-self-center">
-                                            <i class="fa fa-upload fa-3x"></i>
-                                            <br>You can also drag & drop here
-                                        </p>
-                                        <input type="file" class="site-button form-control" id="customFile"
-                                            formControlName="uploadResume">
-                                            <mat-error>
-                                                <span *ngIf="!uploadResume.get('uploadResume').valid && uploadResume.get('uploadResume').touched">Resume is required</span>
-                                              </mat-error>
-                                    </div>
-                                </div> -->
                                 <ngx-dropzone (change)="onSelect($event)" [multiple]="false" [maxFileSize]="2000">
                                     <ngx-dropzone-label>You can also drag & drop here</ngx-dropzone-label>
                                     <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" >
@@ -301,21 +280,6 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
-                                <!-- <div class="form-group">
-                                    <div class="custom-file">
-                                        <p class="m-auto align-self-center">
-                                            <i class="fa fa-upload fa-3x"></i>
-                                            <br>You can also drag & drop here
-                                        </p>
-                                        <input type="file" class="site-button form-control" id="customFile"
-                                            formControlName="uploadDocument">
-                                            <mat-error>
-                                                <span *ngIf="!verification.get('uploadDocument').valid && verification.get('uploadDocument').touched">Document is required</span>
-                                              </mat-error>
-                                    </div>
-                                </div> -->
-                            
-                            
                                 <ngx-dropzone (change)="onSelect1($event)" [multiple]="false" [maxFileSize]="2000">
                                     <ngx-dropzone-label>You can also drag & drop here</ngx-dropzone-label>
                                     <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove1(f)"  >
@@ -332,14 +296,6 @@
                     </form>
                 </div>
             </mat-step>
-            <!-- <mat-step>
-                <ng-template matStepLabel>Done</ng-template>
-                <p>You are now done.</p>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
-                </div>
-            </mat-step> -->
         </mat-horizontal-stepper>
 
     </div>

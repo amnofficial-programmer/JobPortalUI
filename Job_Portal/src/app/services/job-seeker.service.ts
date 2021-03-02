@@ -82,18 +82,16 @@ getAllSalaryRanges(): Observable<ResponseModel>{
 }
 
 getAllSkills(ids): Observable<ResponseModel>{
-	debugger
-	// const queryParams: any = {};
-    // queryParams.myArray = JSON.stringify(ids);
-	// const httpParams =new HttpParams()
-	// .set('functionalAreaId',queryParams )
-	// const httpHeaders = this.getHTTPHeaders();
-	// return this.http.get<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Skills,{   headers: httpHeaders,params:httpParams});
-
 	const httpHeaders = this.getHTTPHeaders();
 	return this.http.put<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Skills,ids,{headers: httpHeaders});
 
 }
+
+getJobsCount(): Observable<any>{
+	const httpHeaders = this.getHTTPHeaders();
+	return this.http.get<any>(Constants.URL.DOMAIN_URL+Constants.URL.GetJobsCount,{headers: httpHeaders});
+}
+
 
 
 

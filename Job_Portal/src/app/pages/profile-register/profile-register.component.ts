@@ -447,7 +447,7 @@ export class ProfileRegisterComponent implements OnInit {
       // recordedData is a blob object containing the recorded data that
       // can be downloaded by the user, stored on server etc.
 	  console.log('finished recording: ', this.player.recordedData);
-	  this.player.record().saveAs({'video': 'my-video-file-name.webm'});
+	  //this.player.record().saveAs({'video': 'my-video-file-name.webm'});
 
 	//   var videoBlob = this.player.recordedData.getBlob();
 

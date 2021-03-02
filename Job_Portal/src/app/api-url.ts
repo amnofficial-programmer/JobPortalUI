@@ -2,7 +2,8 @@ export class Constants {
    
     public static URL: any = {
 
-        HOST_URL: 'https://macraxs.com/macrax/',
+        DOMAIN_URL: 'https://tier1jobs.in/',
+        HOST_URL: 'https://tier1jobs.in/macrax/',
         // HOST_URL:'http://localhost:8090/macrax/',
         CHAT_SERVER_URL : 'http://103.12.211.10:3000/',
         User_Singup: 'auth/signup',
@@ -26,7 +27,8 @@ export class Constants {
         GetJobSeekers: 'auth/users?role=',
         GetAllHostoricalChats: 'chatserver/getHistoricalChats',
         GetAllJobs: 'user/jobs?index=',
-        GetAllJobSeekers:'user/active/jobSeeker'
+        GetAllJobSeekers:'user/active/jobSeeker',
+        GetJobsCount: 'admin/recruiter/get/all/records',
 
 }
 public static Roles:any={

@@ -4,27 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminJobseekersService } from '../services/admin-jobseekers.service';
 import { JobSeekerModel } from '../../models/job-seeker.model';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { FormGroup, FormControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-jobseekers',
@@ -33,31 +14,91 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class JobseekersComponent implements OnInit {
 
+  showModal : boolean;
+  propicUrl : string;
+  selectedJobseeker : JobSeekerModel;
+  jobseekerlist : JobSeekerModel[];
+
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['uid', 'fullName', 'college', 'experience', 'verificationStatus'];
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
-  dataSource = new MatTableDataSource<JobSeekerModel>();
+  dataSource:any
   @ViewChild(MatSort) sort: MatSort;
-  
+  jobSeekerForm : FormGroup
+  id : FormControl
+  status : FormControl
 
-  constructor(private adminJobseekersService:AdminJobseekersService) {
-
+  constructor(private adminJobseekersService:AdminJobseekersService, private toastrService: ToastrService) {
+      this.propicUrl = '';
+      this.dataSource = new MatTableDataSource<JobSeekerModel>();
+      this.selectedJobseeker = new JobSeekerModel()
+      this.jobSeekerForm = new FormGroup({
+        status: new FormControl(),
+        id: new FormControl()
+     }); 
    }
 
   ngOnInit(): void {
-    this.adminJobseekersService.getJobSeekerList(2,1).subscribe((response) =>{
+    this.refreshJobSeekerList()
+  }
+
+  refreshJobSeekerList(){
+    this.dataSource = new MatTableDataSource<JobSeekerModel>();
+    this.adminJobseekersService.getJobSeekerList(2,0).subscribe((response) =>{
       if(response.status==200){
-        let data = response['data']
-        data.forEach(element => {
+        this.jobseekerlist = response['data']
+        this.jobseekerlist.forEach(element => {
           this.dataSource.data.push(element) ; 
         });
         this.dataSource.paginator = this.paginator;
         //this.dataSource._updateChangeSubscription();
       }else{
-        alert(response.msg)
+        this.toastrService.error(response.msg,'Error', {
+          timeOut: 2000,
+        });
       }
     })
-    
+  }
+
+
+	getProfilePic(selectedJobseeker:JobSeekerModel){
+    if(selectedJobseeker != undefined){
+      return selectedJobseeker.profileUrl
+    }
+
+	}
+
+
+  //Bootstrap Modal Close event
+  hide()
+  {
+    this.showModal = false;
+  }
+
+  submit(){
+    const status = this.jobSeekerForm.get('status').value == 'approve' ? 1 : 0
+    this.adminJobseekersService.updateJobSeekerVerificationStatus({'id':this.selectedJobseeker.id , 'verificationStatus':status}).subscribe(res=>{
+      if(res.status==200){    
+        this.refreshJobSeekerList();
+        this.hide();
+        this.toastrService.success(res.msg,'Success', {
+          timeOut: 2000,
+        });
+        
+      }else{
+        alert(res.msg);
+        this.toastrService.error(res.msg,'Error', {
+          timeOut: 2000,
+        });
+      }
+    });
+  }
+
+  openJobSeeker(row:JobSeekerModel){
+    this.jobSeekerForm.get('status').value == 'approve'
+    this.showModal = true; 
+    this.selectedJobseeker = row
   }
 
   ngAfterViewInit() {
