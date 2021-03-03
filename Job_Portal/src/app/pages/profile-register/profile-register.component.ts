@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { JobSeekerService } from 'src/app/services/job-seeker.service';
 import { CollegeModel } from 'src/app/models/college.model';
@@ -23,7 +23,8 @@ import { ResponseModel } from 'src/app/models/reponse.model';
 @Component({
 	selector: 'app-profile-register',
 	templateUrl: './profile-register.component.html',
-	styleUrls: ['./profile-register.component.css']
+	styleUrls: ['./profile-register.component.css'],
+	encapsulation: ViewEncapsulation.None
 })
 export class ProfileRegisterComponent implements OnInit {
 

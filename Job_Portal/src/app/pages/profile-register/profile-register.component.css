@@ -51,3 +51,7 @@ h5
 .edit a {
 	color: #000;
 }
+
+.multiselect-dropdown .dropdown-list{
+ bottom: 100%;
+}
