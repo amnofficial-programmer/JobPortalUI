@@ -17,12 +17,14 @@ import { JobSeekerModel } from '../models/job-seeker.model';
 
 @Injectable()
 export class JobSeekerService {
+
 	token:any;
 	constructor(private http: HttpClient, private sessionStore: SessionStorageService) { 
-	  this.token = sessionStore.retrieve('macrax-token');
+	 // this.token = sessionStore.retrieve('macrax-token');
 	}
 
 	getHTTPHeaders(): HttpHeaders {
+		this.token = this.sessionStore.retrieve('macrax-token');
 		let result = new HttpHeaders();
 		result = result.set('Content-Type', 'application/json');
 		result = result.set('Authorization', 'Bearer ' +this.token);

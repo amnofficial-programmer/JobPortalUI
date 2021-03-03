@@ -141,8 +141,7 @@ export class ProfileRegisterComponent implements OnInit {
 			console.log(res);
 			if(res.status==200){
 			this.functaionAreaList=res.data;
-			
-				console.log("Area Lists"+this.functaionAreaList);
+			//console.log("Area Lists"+this.functaionAreaList);
 			}else{
 				alert(res.msg)
 			}

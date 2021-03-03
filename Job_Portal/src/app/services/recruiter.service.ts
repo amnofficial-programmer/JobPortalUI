@@ -21,16 +21,11 @@ export class RecruiterService {
     token:any;
 
     constructor(private http: HttpClient, private sessionStore: SessionStorageService) { 
-        //this.token=localStorage.getItem('macrax-token')
-        this.token = sessionStore.retrieve('macrax-token')
 
     }
     
-//     createRecruiterUser(user: UserModel): Observable<ResponseModel> {
-// 		return this.http.post<ResponseModel>(Constants.URL.HOST_URL+Constants.URL.Job_Seeker, user);
-// 	}
-    
     getHTTPHeaders(): HttpHeaders {
+        this.token = this.sessionStore.retrieve('macrax-token');
         let result = new HttpHeaders();
         result = result.set('Content-Type', 'application/json');
         result = result.set('Authorization', 'Bearer ' +this.token);
